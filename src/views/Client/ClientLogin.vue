@@ -1,0 +1,61 @@
+<template>
+    <div>
+        <h1>Login Page</h1>
+        <form>
+            <input type="text" placeholder="email" v-model="email">
+            <input type="password" placeholder="password" v-model="password">
+        </form>
+        <LoginButtons/>
+        <div v-if="errorMessage"> 
+            <p> User Not Found </p>
+        </div>
+    </div>
+
+
+</template>
+
+<script>
+import cookies from 'vue-cookies';
+import axios from 'axios';
+import LoginButtons from '../components/LoginButtons.vue'
+
+    export default {
+        name : "ClientLogin",
+        data() {
+            return {
+                email: "",
+                password: ""
+            }
+        },
+        methods: {
+            login: function(){
+                axios.request({
+                    url: process.env.VUE_APP_API_URL + "https://foodierest.ml/api/client-login",
+                    method : "POST",
+                    headers:{
+                        "Content-Type":"application/json",
+                        "x-api-key" :"process.env.VUE_APP_API_KEY"
+                    },
+                    data:{
+                        email : this.email,
+                        password : this.password,
+                    },                    
+                }).then((response)=>{
+                    cookies.set('loginToken', response.data.token)
+                    console.log(response);
+                    this.$router.push('/clienthome');
+                }).catch((error)=>{
+                    console.log(error);
+                    this.errorMessage = "user not found";
+                })
+            }
+        },
+        components: {
+            LoginButtons
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+
+</style>
