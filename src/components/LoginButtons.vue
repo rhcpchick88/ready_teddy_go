@@ -1,12 +1,12 @@
 <template>
     <div>
-        <h1>blabla</h1>
+        <h1>button component</h1>
     </div>
 </template>
 
 <script>
     export default {
-        name : 'LoginButtons'
+        name: 'LoginButtons'
     }
 </script>
 

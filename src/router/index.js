@@ -13,22 +13,22 @@ const routes = [
   {
     path: '/client',
     name: 'client',
-    component: () => import('../views/Client/ClientLogin.vue')
+    component: () => import('../views/ClientLogin.vue')
   },
   {
     path: '/restaurant',
     name: 'restaurant',
-    component: () => import('../views/Restaurant/RestaurantLogin.vue')
+    component: () => import('../views/RestaurantLogin.vue')
   },
   {
     path: '/restauranthome',
     name: 'restaurant',
-    component: () => import('../views/Restaurant/RestaurantHome.vue')
+    component: () => import('../views/RestaurantHome.vue')
   },
   {    
     path: '/clienthome',
     name: 'client',
-    component: () => import('../views/Client/ClientHome.vue')
+    component: () => import('../views/ClientHome.vue')
   },
 ]
 

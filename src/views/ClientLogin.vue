@@ -17,7 +17,7 @@
 <script>
 import cookies from 'vue-cookies';
 import axios from 'axios';
-import LoginButtons from '../components/LoginButtons.vue'
+import LoginButtons from '@/components/LoginButtons.vue'
 
     export default {
         name : "ClientLogin",
