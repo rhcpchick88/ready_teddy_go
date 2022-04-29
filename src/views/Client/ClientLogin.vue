@@ -1,10 +1,7 @@
 <template>
     <div>
         <h1>Login Page</h1>
-        <form>
-            <input type="text" placeholder="email" v-model="email">
-            <input type="password" placeholder="password" v-model="password">
-        </form>
+        
         <LoginButtons/>
         <div v-if="errorMessage"> 
             <p> User Not Found </p>
