@@ -1,7 +1,10 @@
+//client login or register
+//link login buttons component
+
 <template>
     <div>
         <h1>Login Page</h1>
-        
+
         <LoginButtons/>
         <div v-if="errorMessage"> 
             <p> User Not Found </p>

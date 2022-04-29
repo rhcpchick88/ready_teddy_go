@@ -1,3 +1,4 @@
+//links to ClientLogin and RestaurantLogin
 <template>
     <div>
         <form>
