@@ -1,6 +1,13 @@
 //client login or register
 //link login buttons component
 
+//API call to sign in
+//clicking button takes you to client home page
+
+//1 API REQUEST:
+//POST
+//API FOODIEREST.ML/API/CLIENT-LOGIN
+
 <template>
     <div>
         <h1>Login Page</h1>

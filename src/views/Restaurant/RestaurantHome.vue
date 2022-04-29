@@ -1,6 +1,14 @@
 //restaurant home page - welcome _______ restaurant name
-//as well as the restaurant links component, show the main links on the actual page too
+
 //link rest view component
+
+//as well as the restaurant links component, show the main links on the actual page too
+
+////API call for restaurant name
+
+// 1 API REQUEST:
+//GET 
+//API link FOODIEREST.ML/API/RESTAURANT
 
 <template>
     <div>

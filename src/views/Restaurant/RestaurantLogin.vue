@@ -1,5 +1,14 @@
 //restaurant login or register
+
 //link login button component
+
+//API call to sign in
+//clicking button takes you to client home page
+
+//1 API REQUEST:
+//POST
+//API FOODIEREST.ML/API/RESTAURANT-LOGIN
+
 <template>
     <div>
         <h1>Login Page</h1>
