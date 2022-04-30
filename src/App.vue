@@ -1,33 +1,23 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/client">Client login</router-link> |
-      <router-link to="/restaurant">Restaurant login</router-link>
-    </nav>
-    <router-view/>
+  <div>
+    <v-container>
+      <nav>
+        <v-btn to="/">Home</v-btn> |
+        <v-btn to="/client">Client login</v-btn> |
+        <v-btn to="/restaurant">Restaurant login</v-btn>
+      </nav>
+      <router-view/>
+    </v-container>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-nav {
-  padding: 30px;
+export default {
+  name: 'App',
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+  data: () => ({
+    //
+  }),
+};
+</script>

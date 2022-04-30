@@ -10,12 +10,12 @@
 
 <template>
     <div>
-        <h1>CLient Login Page</h1>
+        <h1>Client Login Page</h1>
         <form>
             <input type="text" placeholder="email" v-model="email">
             <input type="password" placeholder="password" v-model="password">
         </form>
-        <button>Log in</button>
+        <button v-on:click="login()">Log in</button>
         <button v-on:click="goToRegister()">Register</button>   
         <div v-if="errorMessage"> 
             <p> User Not Found </p>
@@ -38,7 +38,7 @@ import axios from 'axios';
             }
         },
         methods: {
-            login: function(){
+            login(){
                 axios.request({
                     url: process.env.VUE_APP_API_URL + "https://foodierest.ml/api/client-login",
                     method : "POST",
@@ -56,7 +56,7 @@ import axios from 'axios';
                     this.$router.push('/clienthome');
                 }).catch((error)=>{
                     console.log(error);
-                    this.errorMessage = "user not found";
+                    this.errorMessage;
                 })
             },
             goToRegister() {
