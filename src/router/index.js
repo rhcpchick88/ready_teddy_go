@@ -30,6 +30,16 @@ const routes = [
     name: 'client',
     component: () => import('../views/Client/ClientHome.vue')
   },
+  {    
+    path: '/clientregister',
+    name: 'client register',
+    component: () => import('../views/Client/ClientRegister.vue')
+  }, 
+  {    
+    path: '/restaurantregister',
+    name: 'restaurant register',
+    component: () => import('../views/Restaurant/RestaurantRegister.vue')
+  },  
 ]
 
 const router = new VueRouter({

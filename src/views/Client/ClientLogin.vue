@@ -10,9 +10,13 @@
 
 <template>
     <div>
-        <h1>Login Page</h1>
-
-        <LoginButtons/>
+        <h1>CLient Login Page</h1>
+        <form>
+            <input type="text" placeholder="email" v-model="email">
+            <input type="password" placeholder="password" v-model="password">
+        </form>
+        <button>Log in</button>
+        <button v-on:click="goToRegister()">Register</button>   
         <div v-if="errorMessage"> 
             <p> User Not Found </p>
         </div>
@@ -24,7 +28,6 @@
 <script>
 import cookies from 'vue-cookies';
 import axios from 'axios';
-import LoginButtons from '@/components/LoginButtons.vue'
 
     export default {
         name : "ClientLogin",
@@ -55,10 +58,10 @@ import LoginButtons from '@/components/LoginButtons.vue'
                     console.log(error);
                     this.errorMessage = "user not found";
                 })
+            },
+            goToRegister() {
+                this.$router.push('/clientregister')
             }
-        },
-        components: {
-            LoginButtons
         }
     }
 </script>

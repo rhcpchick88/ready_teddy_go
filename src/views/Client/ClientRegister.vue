@@ -14,3 +14,36 @@
 //POST, PATCH, DELETE
 //API URL FOODIEREST.ML/API/CLIENT
 
+<template>
+    <div>
+        <PublicLinks/>
+        <h1>Client create or update profile</h1>
+        <form>
+            <label>Email:</label>
+            <input type="email" required>
+            <label>Username :</label>
+            <input type="username" required>            
+            <label>First name:</label>
+            <input type="firstName" required>
+            <label>Last name:</label>
+            <input type="lastName" required>
+            <label>Password:</label>
+            <input type="password" required>            
+        </form>
+        
+    </div>
+</template>
+
+<script>
+import PublicLinks from '@/components/PublicLinks.vue'
+    export default {
+        name: 'ClientRegister',
+        components: {
+            PublicLinks
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+
+</style>
