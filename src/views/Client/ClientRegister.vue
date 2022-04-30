@@ -27,8 +27,8 @@
                 md="4"
             >
                 <v-text-field
-                v-model="firstname"
-                :rules="firstnameRules"
+                v-model="firstName"
+                :rules="firstNameRules"
                 label="First name"
                 required
                 ></v-text-field>
@@ -39,8 +39,8 @@
                 md="4"
             >
                 <v-text-field
-                v-model="lastname"
-                :rules="lastnameRules"
+                v-model="lastName"
+                :rules="lastNameRules"
                 label="Last name"
                 required
                 ></v-text-field>
@@ -82,9 +82,20 @@
                 required
                 ></v-text-field>
             </v-col>
+            <v-col
+                cols="12"
+                md="4"
+            >
+                <v-text-field
+                type="pictureUrl"
+                v-model="pictureUrl"
+                label="Picture URL"
+                outlined
+                ></v-text-field>
+            </v-col>            
 
             </v-row>
-        <v-btn  @click="submitForm"> Register </v-btn>
+        <v-btn  @click="submitForm(username, firstName, lastName, email, password, pictureUrl)"> Register </v-btn>
         </v-container>
         </v-form>
     </v-app>
@@ -93,10 +104,10 @@
 </template>
 
 <script>
-
-import axios from 'axios'
+import {useMainStore} from '@/stores/main.js'
+import {mapActions} from 'pinia'
 import PublicLinks from '@/components/PublicLinks.vue'
-import cookies from 'vue-cookies'
+
 
     export default {
         name: 'ClientRegister',
@@ -104,46 +115,50 @@ import cookies from 'vue-cookies'
             PublicLinks
         },
         data: () => ({
-            valid: false,
             email:'',
             username:'',
             firstName:'',
             lastName:'',
             password:'',
+            pictureUrl:undefined,
             emailRules: [
             v => !!v || 'E-mail is required',
             v => /.+@.+/.test(v) || 'E-mail must be valid',
             ],
             passwordRules: [
             v => !!v || 'Password is required',
-            v => /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(v) || 'Password must contain at least lowercase letter, one number, and one uppercase letter',
+            v => /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(v) || 'Password must be at least 5 characters and contain at least one lowercase letter, one number, and one uppercase letter',
             ],
-            firstnameRules: [
+            firstNameRules: [
             v => !!v || 'First name is required'
             ], 
-            lastnameRules: [
+            lastNameRules: [
             v => !!v || 'Last name is required'
             ],        
             usernameRules: [
             v => !!v || 'Username is required'
             ],                  
         }),
-        methods: {
-            submitForm () {
-                axios.request({
-                    method: "POST",
-                    URL: process.env.VUE_APP_API_URL + "https://foodierest.ml/api/client",
-                    headers:{
-                        'x-api-key':'process.env.VUE_APP_API_KEY'
-                    }
-                }).then((response)=>{
-                    cookies.set('loginToken',response.data.token);
-                    this.$router.push('/clienthome')
-                }).catch((error)=>{
-                    console.log(error);
+    methods: {
+        ...mapActions(useMainStore,['submitForm']),
+        handleUserRegistration() {
+            //Some kind of form validation
+            this.submitForm(this.username, this.firstName, this.lastName, this.email, this.password, this.pictureUrl);
+        },
+        handleError(response){
+            console.log(response);
+        }
+    },
+    mounted () {
+        useMainStore().$onAction(({name, after})=>{
+            if (name == "userRegisterAlert"){
+                console.log("handling");
+                after((response)=>{
+                    this.handleError(response);
                 })
             }
-        }
+        });
+    },
     }
     
 

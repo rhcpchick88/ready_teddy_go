@@ -34,9 +34,19 @@ const routes = [
     name: 'restaurant register',
     component: () => import('../views/Restaurant/RestaurantRegister.vue')
   },  
+  {    
+    path: '/clientprofile',
+    name: 'client profile',
+    component: () => import('../views/Client/ClientProfile.vue')
+  },  
+  {    
+    path: '/restaurantprofile',
+    name: 'restaurant profile',
+    component: () => import('../views/Restaurant/RestaurantProfile.vue')
+  },    
 ]
 
-const router = new VueRouter({
+export const router = new VueRouter({
   routes
 })
 
