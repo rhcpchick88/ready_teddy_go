@@ -95,7 +95,7 @@
             </v-col>            
 
             </v-row>
-        <v-btn  @click="submitForm(username, firstName, lastName, email, password, pictureUrl)"> Register </v-btn>
+        <v-btn  @click="submitClient(username, firstName, lastName, email, password, pictureUrl)"> Register </v-btn>
         </v-container>
         </v-form>
     </v-app>
@@ -140,7 +140,7 @@ import PublicLinks from '@/components/PublicLinks.vue'
             ],                  
         }),
     methods: {
-        ...mapActions(useMainStore,['submitForm']),
+        ...mapActions(useMainStore,['submitClient']),
         handleUserRegistration() {
             //Some kind of form validation
             this.submitForm(this.username, this.firstName, this.lastName, this.email, this.password, this.pictureUrl);

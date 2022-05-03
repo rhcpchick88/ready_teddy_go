@@ -11,7 +11,7 @@ export const useMainStore = defineStore('main',{
         
     },
     actions: {
-        submitForm(username, firstName, lastName, email, password, pictureUrl){
+        submitClient(username, firstName, lastName, email, password, pictureUrl){
             axios.request({
                 headers: {
                     "x-api-key" : process.env.VUE_APP_API_KEY
@@ -37,6 +37,35 @@ export const useMainStore = defineStore('main',{
             })
         },
         userRegisterAlert(error){
+            return (error)
+        },
+        submitRestaurant(name, address, bio, city, email, password, phoneNum){
+            axios.request({
+                headers: {
+                    "x-api-key" : process.env.VUE_APP_API_KEY
+                },
+                url:process.env.VUE_APP_API_URL+"restaurant",
+                method : "POST",
+                data: {
+                    name,
+                    address,
+                    bio,
+                    city,
+                    email,
+                    password,
+                    phoneNum
+                }
+                
+            }).then((response)=>{
+                cookies.set('loginToken', response.data.token);
+                console.log(cookies.get('loginToken'));
+                router.push('/restaurantprofile');
+            }).catch((error)=>{
+                console.log(error.response.data);
+                this.restaurantRegisterAlert(error.response);
+            })
+        },
+        restaurantRegisterAlert(error){
             return (error)
         }
     }

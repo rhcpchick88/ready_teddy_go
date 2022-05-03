@@ -16,12 +16,12 @@ const routes = [
   },
   {
     path: '/restauranthome',
-    name: 'restaurant',
+    name: 'restauranthome',
     component: () => import('../views/Restaurant/RestaurantHome.vue')
   },
   {    
     path: '/clienthome',
-    name: 'client',
+    name: 'clienthome',
     component: () => import('../views/Client/ClientHome.vue')
   },
   {    
