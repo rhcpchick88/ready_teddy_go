@@ -29,7 +29,7 @@ import cookies from 'vue-cookies'
                 }).then((response)=>{
                     cookies.remove('loginToken', response.data.token)
                     console.log(response);
-                    // this.$router.push('/');
+                    this.$router.push('/');
                 }).catch((error)=>{
                     console.log(error);
                     this.errorMessage = "Unable to logout";
