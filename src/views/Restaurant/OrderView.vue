@@ -9,7 +9,7 @@
         <ViewOrder/>
         <ConfirmOrder/>
         <footer>
-            <LogoutFooter/>
+            <RestaurantLogout/>
         </footer>
     </div>
 </template>
@@ -18,7 +18,7 @@
 import RestaurantLinks from '@/components/RestaurantLinks.vue'
 import ConfirmOrder from '@/components/ConfirmOrder.vue'
 import ViewOrder from '@/components/ViewOrder.vue'
-import LogoutFooter from '@/components/ClientLogout.vue'
+import RestaurantLogout from '@/components/RestaurantLogout.vue'
 
     export default {
         name:'OrderView',
@@ -26,7 +26,7 @@ import LogoutFooter from '@/components/ClientLogout.vue'
             RestaurantLinks,
             ConfirmOrder, 
             ViewOrder,
-            LogoutFooter
+            RestaurantLogout
         }
     }
 </script>

@@ -67,7 +67,7 @@
         </v-app>
         </div>
         <footer>
-            <LogoutFooter/>
+            <RestaurantLogout/>
         </footer>
     </div>
 </template>
@@ -76,13 +76,13 @@
 import {useMainStore} from '@/stores/main.js'
 import {mapActions} from 'pinia'
 import RestaurantLinks from '@/components/RestaurantLinks.vue'
-import LogoutFooter from '@/components/ClientLogout.vue'
+import RestaurantLogout from '@/components/RestaurantLogout.vue'
 
     export default {
         name:'RestaurantMenu',
         components: {
             RestaurantLinks,
-            LogoutFooter
+            RestaurantLogout
         },
         data: () => ({
             name:'',

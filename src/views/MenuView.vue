@@ -10,9 +10,6 @@
         <RestaurantLinks/>
         <ClientLinks/>
         <PublicLinks/>
-        <footer>
-            <LogoutFooter/>
-        </footer>
     </div>
 </template>
 

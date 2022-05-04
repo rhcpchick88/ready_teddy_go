@@ -15,20 +15,20 @@
         <RestaurantLinks/>
         <h1>I'm logged in!</h1>
         <footer>
-            <LogoutFooter/>
+            <RestaurantLogout/>
         </footer>
     </div>
 </template>
 
 <script>
 import RestaurantLinks from '@/components/RestaurantLinks.vue'
-import LogoutFooter from '@/components/ClientLogout.vue'
+import RestaurantLogout from '@/components/RestaurantLogout.vue'
 
     export default {
         name:'RestaurantHome',
         components:{
             RestaurantLinks,
-            LogoutFooter
+            RestaurantLogout
         }
     }
 </script>
