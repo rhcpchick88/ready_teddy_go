@@ -7,9 +7,15 @@
 // ALSO do v-if for logout footer.
 <template>
     <div>
-        <RestaurantLinks/>
+        <div v-if="restaurantlogin">
+            <RestaurantLinks/>
+        </div>
         <ClientLinks/>
         <PublicLinks/>
+        <div v-if ="example">
+            <RestaurantLogout/>
+            <ClientLogout/>
+        </div>
     </div>
 </template>
 

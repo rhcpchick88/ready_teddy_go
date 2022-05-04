@@ -42,7 +42,7 @@
                     md="4"
                 >
                     <v-text-field
-                    v-model="Price"
+                    v-model="price"
                     :rules="priceRules"
                     label="Price"
                     required
@@ -88,7 +88,7 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
             name:'',
             description:'',
             price:'',
-            imageUrl:'',
+            imageUrl: undefined,
             nameRules: [
             v => !!v || 'Item name is required'
             ],

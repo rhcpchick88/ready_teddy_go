@@ -71,6 +71,7 @@ export const useMainStore = defineStore('main',{
         submitMenu(name, description, price, imageUrl){
             axios.request({
                 headers: {
+                    "token" : cookies.get('loginToken'),
                     "x-api-key" : process.env.VUE_APP_API_KEY
                 },
                 url:process.env.VUE_APP_API_URL+"menu",
@@ -82,7 +83,8 @@ export const useMainStore = defineStore('main',{
                     imageUrl
                 }
             }).then((response)=>{
-                cookies.get('loginToken', response.data.token);
+                cookies.get('loginToken');
+                console.log(response);
                 router.push('/menu');
             }).catch((error)=>{
                 console.log(error.response.data);

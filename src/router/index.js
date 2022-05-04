@@ -49,6 +49,11 @@ const routes = [
     name: 'menu',
     component: () => import('../views/MenuView.vue')
   },  
+  {    
+    path: '/createmenu',
+    name: 'createmenu',
+    component: () => import('../views/Restaurant/RestaurantMenu.vue')
+  },  
 ]
 
 export const router = new VueRouter({
