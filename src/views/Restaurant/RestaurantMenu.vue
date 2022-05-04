@@ -8,64 +8,67 @@
 <template>
     <div>
         <RestaurantLinks/>
-    <div id="app">
-    <v-app id="inspire">
-        <v-form v-model="valid">
-        <v-container>
-            <v-row>
-            <v-col
-                cols="12"
-                md="4"
-            >
-                <v-text-field
-                v-model="name"
-                :rules="nameRules"
-                label="Item name"
-                required
-                ></v-text-field>
-            </v-col>
-    
-            <v-col
-                cols="12"
-                md="4"
-            >
-                <v-text-field
-                v-model="description"
-                :rules="descriptionRules"
-                label="Item description"
-                required
-                ></v-text-field>
-            </v-col>
-    
-            <v-col
-                cols="12"
-                md="4"
-            >
-                <v-text-field
-                v-model="Price"
-                :rules="priceRules"
-                label="Price"
-                required
-                ></v-text-field>
-            </v-col>
+        <div id="app">
+        <v-app id="inspire">
+            <v-form v-model="valid">
+            <v-container>
+                <v-row>
+                <v-col
+                    cols="12"
+                    md="4"
+                >
+                    <v-text-field
+                    v-model="name"
+                    :rules="nameRules"
+                    label="Item name"
+                    required
+                    ></v-text-field>
+                </v-col>
+        
+                <v-col
+                    cols="12"
+                    md="4"
+                >
+                    <v-text-field
+                    v-model="description"
+                    :rules="descriptionRules"
+                    label="Item description"
+                    required
+                    ></v-text-field>
+                </v-col>
+        
+                <v-col
+                    cols="12"
+                    md="4"
+                >
+                    <v-text-field
+                    v-model="Price"
+                    :rules="priceRules"
+                    label="Price"
+                    required
+                    ></v-text-field>
+                </v-col>
 
-            <v-col
-                cols="12"
-                md="4"
-            >
-                <v-text-field
-                v-model="imageUrl"
-                label="Image URL"
-                outlined
-                ></v-text-field>
-            </v-col>
+                <v-col
+                    cols="12"
+                    md="4"
+                >
+                    <v-text-field
+                    v-model="imageUrl"
+                    label="Image URL"
+                    outlined
+                    ></v-text-field>
+                </v-col>
 
-            </v-row>
-        <v-btn  @click="submitMenu(name, description, price, imageUrl)"> Register </v-btn>
-        </v-container>
-        </v-form>
-    </v-app>
-</div>
+                </v-row>
+            <v-btn  @click="submitMenu(name, description, price, imageUrl)"> Submit menu item </v-btn>
+            </v-container>
+            </v-form>
+        </v-app>
+        </div>
+        <footer>
+            <LogoutFooter/>
+        </footer>
     </div>
 </template>
 
@@ -73,11 +76,13 @@
 import {useMainStore} from '@/stores/main.js'
 import {mapActions} from 'pinia'
 import RestaurantLinks from '@/components/RestaurantLinks.vue'
+import LogoutFooter from '@/components/ClientLogout.vue'
 
     export default {
         name:'RestaurantMenu',
         components: {
-            RestaurantLinks
+            RestaurantLinks,
+            LogoutFooter
         },
         data: () => ({
             name:'',

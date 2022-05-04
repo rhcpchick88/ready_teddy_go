@@ -10,7 +10,7 @@
 
 <template>
     <div>
-        <h1>Restaurant Login Page</h1>
+        <h1>Client Login Page</h1>
         <v-app id="inspire">
             <v-form v-model="valid">
             <v-container>

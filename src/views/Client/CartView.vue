@@ -24,3 +24,35 @@ posted orders which if clicked show up through the view order component through 
 // 3 API REQUESTS: 
 // GET, POST, PATCH
 //API IS FOODIEREST.ML/API/ORDER
+<template>
+    <div>
+        <ClientLinks/>
+        <ViewOrder/>
+        <ConfirmOrder/>
+        <footer>
+            <ClientLogout/>
+        </footer>        
+
+    </div>
+</template>
+
+<script>
+import ClientLinks from '@/components/ClientLinks.vue'
+import ConfirmOrder from '@/components/ConfirmOrder.vue'
+import ViewOrder from '@/components/ViewOrder.vue'
+import ClientLogout from '@/components/ClientLogout.vue'
+
+    export default {
+        name:'CartView',
+        components: {
+            ClientLinks,
+            ViewOrder,
+            ConfirmOrder,
+            ClientLogout
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+
+</style>

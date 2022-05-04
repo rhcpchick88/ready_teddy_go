@@ -13,3 +13,28 @@
 // API LINK FOODIEREST.ML/API/CLIENT
 
 
+<template>
+    <div>
+        <ClientLinks/>
+        <footer>
+            <ClientLogout/>
+        </footer>
+    </div>
+</template>
+
+<script>
+import ClientLinks from '@/components/ClientLinks.vue'
+import ClientLogout from '@/components/ClientLogout.vue'
+
+    export default {
+        name:'ClientProfile',
+        components: {
+            ClientLinks,
+            ClientLogout
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+
+</style>
