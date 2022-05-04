@@ -30,9 +30,8 @@ posted orders which if clicked show up through the view order component through 
         <ViewOrder/>
         <ConfirmOrder/>
         <footer>
-            <ClientLogout/>
-        </footer>        
-
+            <ClientLogout/>      
+        </footer>
     </div>
 </template>
 

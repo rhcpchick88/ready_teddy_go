@@ -91,7 +91,6 @@ export default {
                     this.$router.push('/clienthome');
                 }).catch((error)=>{
                     console.log(error);
-                    this.errorMessage = "user not found";
                 })
             },
             goToRegister() {

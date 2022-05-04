@@ -1,13 +1,14 @@
 //link return to main and logout components
 <template>
     <div>
-        <h1>Client  links</h1>
+        <h1>Client links</h1>
     </div>
 </template>
 
 <script>
+
     export default {
-        name: 'ClientLinks'
+        name: 'ClientLinks',
     }
 </script>
 

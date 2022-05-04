@@ -6,7 +6,7 @@
 <template>
     <div>
         <v-btn @click="logout">Log out</v-btn>
-        <div v-if="errorMessage"> 
+        <div v-if="error"> 
             <p> Unable to Log out </p>
         </div>
     </div>
@@ -32,7 +32,6 @@ import cookies from 'vue-cookies'
                     this.$router.push('/');
                 }).catch((error)=>{
                     console.log(error);
-                    this.errorMessage = "Unable to logout";
                 })
             },
         },

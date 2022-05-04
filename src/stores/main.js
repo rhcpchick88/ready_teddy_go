@@ -94,6 +94,5 @@ export const useMainStore = defineStore('main',{
         menuCreateAlert(error){
             return (error)
         }
-
     }
 })
