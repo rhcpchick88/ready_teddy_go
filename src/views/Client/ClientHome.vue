@@ -10,13 +10,19 @@ client home page  welcome ______ client name
 
 <template>
     <div>
+        <ClientLinks/>
         <h1>I'm logged in!</h1>
     </div>
 </template>
 
 <script>
+import ClientLinks from '@/components/ClientLinks.vue'
+
     export default {
-        
+        name: 'ClientHome',
+        components:{
+            ClientLinks
+        }
     }
 </script>
 

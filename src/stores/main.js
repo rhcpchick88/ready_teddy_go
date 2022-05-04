@@ -67,6 +67,31 @@ export const useMainStore = defineStore('main',{
         },
         restaurantRegisterAlert(error){
             return (error)
+        },
+        submitMenu(name, description, price, imageUrl){
+            axios.request({
+                headers: {
+                    "x-api-key" : process.env.VUE_APP_API_KEY
+                },
+                url:process.env.VUE_APP_API_URL+"menu",
+                method : "POST",
+                data: {
+                    name,
+                    description,
+                    price,
+                    imageUrl
+                }
+            }).then((response)=>{
+                cookies.get('loginToken', response.data.token);
+                router.push('/menu');
+            }).catch((error)=>{
+                console.log(error.response.data);
+                this.menuCreateAlert(error.response);
+            })
+        },
+        menuCreateAlert(error){
+            return (error)
         }
+
     }
 })

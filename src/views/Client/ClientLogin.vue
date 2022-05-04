@@ -10,41 +10,76 @@
 
 <template>
     <div>
-        <h1>Client Login Page</h1>
-        <form>
-            <input type="text" placeholder="email" v-model="email">
-            <input type="password" placeholder="password" v-model="password">
-        </form>
-        <button v-on:click="login()">Log in</button>
-        <button v-on:click="goToRegister()">Register</button>   
+        <h1>Restaurant Login Page</h1>
+        <v-app id="inspire">
+            <v-form v-model="valid">
+            <v-container>
+                <v-row>
+                    <v-col
+                    cols="12"
+                    md="4"
+                    >
+                        <v-text-field
+                        v-model="email"
+                        :rules="emailRules"
+                        label="Email"
+                        required
+                        ></v-text-field>
+                    </v-col>
+                    <v-col
+                    cols="12"
+                    md="4"
+                    >
+                        <v-text-field
+                        v-model="password"
+                        :rules="passwordRules"
+                        label="Password"
+                        type="password"
+                        required
+                        ></v-text-field>
+                    </v-col>                    
+                </v-row>
+            </v-container>
+            </v-form>
+        <v-btn @click="login">Log in</v-btn>
+        <div>
+            <h1>---</h1>
+        </div>
+        <v-btn @click="goToRegister()">Register</v-btn>   
         <div v-if="errorMessage"> 
             <p> User Not Found </p>
-        </div>
+        </div>            
+        </v-app>
     </div>
-
-
 </template>
 
 <script>
 import cookies from 'vue-cookies';
 import axios from 'axios';
 
-    export default {
-        name : "ClientLogin",
-        data() {
+export default {
+    name : 'ClientLogin',
+    data() {
             return {
                 email: "",
-                password: ""
+                password: "",
+                emailRules: [
+                v => !!v || 'E-mail is required',
+                v => /.+@.+/.test(v) || 'E-mail must be valid',
+                ],
+                passwordRules: [
+                v => !!v || 'Password is required',
+                v => /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(v) || 'Password must be at least 5 characters and contain at least one lowercase letter, one number, and one uppercase letter',
+                ]
             }
         },
         methods: {
-            login(){
+            login: function(){
                 axios.request({
-                    url: process.env.VUE_APP_API_URL + "https://foodierest.ml/api/client-login",
+                    url: process.env.VUE_APP_API_URL + "client-login",
                     method : "POST",
                     headers:{
-                        "Content-Type":"application/json",
-                        "x-api-key" :"process.env.VUE_APP_API_KEY"
+                        "x-api-key" :process.env.VUE_APP_API_KEY
                     },
                     data:{
                         email : this.email,
@@ -56,14 +91,14 @@ import axios from 'axios';
                     this.$router.push('/clienthome');
                 }).catch((error)=>{
                     console.log(error);
-                    this.errorMessage;
+                    this.errorMessage = "user not found";
                 })
             },
             goToRegister() {
                 this.$router.push('/clientregister')
             }
         }
-    }
+}
 </script>
 
 <style lang="scss" scoped>
