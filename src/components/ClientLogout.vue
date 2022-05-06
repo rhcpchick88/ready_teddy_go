@@ -6,9 +6,9 @@
 <template>
     <div>
         <v-btn @click="logout">Log out</v-btn>
-        <div v-if="error"> 
+        <!-- <div v-if="error"> 
             <p> Unable to Log out </p>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -27,7 +27,7 @@ import cookies from 'vue-cookies'
                         "x-api-key" :process.env.VUE_APP_API_KEY
                     }                
                 }).then((response)=>{
-                    cookies.remove('loginToken', response.data.token)
+                    cookies.remove('clientToken', response.data.token)
                     console.log(response);
                     this.$router.push('/');
                 }).catch((error)=>{

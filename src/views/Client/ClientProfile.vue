@@ -31,7 +31,7 @@ import ClientLogout from '@/components/ClientLogout.vue'
         components: {
             ClientLinks,
             ClientLogout
-        }
+        },
     }
 </script>
 

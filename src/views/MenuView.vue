@@ -7,32 +7,42 @@
 // ALSO do v-if for logout footer.
 <template>
     <div>
-        <div v-if="restaurantlogin">
-            <RestaurantLinks/>
-        </div>
-        <ClientLinks/>
-        <PublicLinks/>
-        <div v-if ="example">
-            <RestaurantLogout/>
-            <ClientLogout/>
+        <div v-if=clientLogin()><ClientLinks/></div>
+        <div v-else-if=restaurantLogin()><RestaurantLinks/></div>
+        <div v-else><PublicLinks/></div>
+        <div>
+            <footer v-if=restaurantLogin()><RestaurantLogout/></footer>
+            <footer v-if=clientLogin()><ClientLogout/></footer>
         </div>
     </div>
 </template>
 
 <script>
-// import cookies from 'vue-cookies'
+import cookies from 'vue-cookies'
 
 import RestaurantLinks from '@/components/RestaurantLinks.vue'
 import ClientLinks from '@/components/ClientLinks.vue'
 import PublicLinks from '@/components/PublicLinks.vue'
+import RestaurantLogout from '@/components/RestaurantLogout.vue'
+import ClientLogout from '@/components/ClientLogout.vue'
 
     export default {
         name: 'MenuView',
         components: {
             RestaurantLinks,
             ClientLinks,
-            PublicLinks
-        }
+            PublicLinks,
+            RestaurantLogout,
+            ClientLogout
+        },
+        methods: {
+            clientLogin() {
+                return cookies.get('clientToken')
+            },
+            restaurantLogin(){
+                return cookies.get('restaurantToken')
+            }
+        },
     }
 </script>
 

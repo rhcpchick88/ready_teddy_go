@@ -27,7 +27,7 @@ import cookies from 'vue-cookies'
                         "x-api-key" :process.env.VUE_APP_API_KEY
                     }                
                 }).then((response)=>{
-                    cookies.remove('loginToken', response.data.token)
+                    cookies.remove('restaurantToken', response.data.token)
                     console.log(response);
                     this.$router.push('/');
                 }).catch((error)=>{

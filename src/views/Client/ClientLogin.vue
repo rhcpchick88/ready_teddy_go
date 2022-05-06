@@ -86,7 +86,7 @@ export default {
                         password : this.password,
                     },                    
                 }).then((response)=>{
-                    cookies.set('loginToken', response.data.token)
+                    cookies.set('clientToken', response.data.token)
                     console.log(response);
                     this.$router.push('/clienthome');
                 }).catch((error)=>{

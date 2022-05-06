@@ -28,8 +28,8 @@ export const useMainStore = defineStore('main',{
                 }
                 
             }).then((response)=>{
-                cookies.set('loginToken', response.data.token);
-                console.log(cookies.get('loginToken'));
+                cookies.set('clientToken', response.data.token);
+                console.log(cookies.get('clientToken'));
                 router.push('/clientprofile');
             }).catch((error)=>{
                 console.log(error.response.data);
@@ -57,8 +57,8 @@ export const useMainStore = defineStore('main',{
                 }
                 
             }).then((response)=>{
-                cookies.set('loginToken', response.data.token);
-                console.log(cookies.get('loginToken'));
+                cookies.set('restaurantToken', response.data.token);
+                console.log(cookies.get('restaurantToken'));
                 router.push('/restaurantprofile');
             }).catch((error)=>{
                 console.log(error.response.data);
@@ -71,7 +71,7 @@ export const useMainStore = defineStore('main',{
         submitMenu(name, description, price, imageUrl){
             axios.request({
                 headers: {
-                    "token" : cookies.get('loginToken'),
+                    "token" : cookies.get('restaurantToken'),
                     "x-api-key" : process.env.VUE_APP_API_KEY
                 },
                 url:process.env.VUE_APP_API_URL+"menu",
@@ -83,7 +83,7 @@ export const useMainStore = defineStore('main',{
                     imageUrl
                 }
             }).then((response)=>{
-                cookies.get('loginToken');
+                cookies.get('restaurantToken');
                 console.log(response);
                 router.push('/menu');
             }).catch((error)=>{
