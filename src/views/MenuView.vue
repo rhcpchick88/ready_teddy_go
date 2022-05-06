@@ -9,7 +9,6 @@
     <div>
         <div v-if=clientLogin()><ClientLinks/></div>
         <div v-else-if=restaurantLogin()><RestaurantLinks/></div>
-        <div v-else><PublicLinks/></div>
         <div>
             <footer v-if=restaurantLogin()><RestaurantLogout/></footer>
             <footer v-if=clientLogin()><ClientLogout/></footer>
@@ -22,7 +21,6 @@ import cookies from 'vue-cookies'
 
 import RestaurantLinks from '@/components/RestaurantLinks.vue'
 import ClientLinks from '@/components/ClientLinks.vue'
-import PublicLinks from '@/components/PublicLinks.vue'
 import RestaurantLogout from '@/components/RestaurantLogout.vue'
 import ClientLogout from '@/components/ClientLogout.vue'
 
@@ -31,7 +29,6 @@ import ClientLogout from '@/components/ClientLogout.vue'
         components: {
             RestaurantLinks,
             ClientLinks,
-            PublicLinks,
             RestaurantLogout,
             ClientLogout
         },

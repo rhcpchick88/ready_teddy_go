@@ -5,22 +5,22 @@ import cookies from 'vue-cookies'
 Vue.use(VueRouter)
 
 function clientAuth (to, from, next) {
-  let clientToken = cookies.get('clientToken')
+  let clientToken = cookies.get('clientToken');
   if (clientToken == null){
-    console.log('unknown user')
-    router.push('error')    
+    console.log('unknown user');
+    router.push('error');    
   } else {
-    next()
+    next();
   }
 }
 
 function restaurantAuth (to, from, next) {
-  let restaurantToken = cookies.get('restaurantToken')
+  let restaurantToken = cookies.get('restaurantToken');
   if (restaurantToken == null){
     console.log('unknown user');
-    router.push('error')
+    router.push('error');
   } else {
-    next()
+    next();
   }
 }
 

@@ -1,7 +1,12 @@
 //link return to main and logout components
 <template>
     <div>
-        <h1>Client links</h1>
+        <nav>
+            <v-btn to="/clienthome">Home</v-btn> |
+            <v-btn to="/clientprofile">Profile</v-btn> |
+            <v-btn to="/cartview">Cart</v-btn> |
+            <v-btn to="/menu">View Menus</v-btn>
+        </nav>
     </div>
 </template>
 
