@@ -9,9 +9,9 @@
 
 <template>
     <div>
-        <h1>Restaurant Login Page</h1>
+        <h1>Log in Here:</h1>
         <v-app id="inspire">
-            <v-form v-model="valid">
+            <v-form >
             <v-container>
                 <v-row>
                     <v-col
@@ -40,14 +40,14 @@
                 </v-row>
             </v-container>
             </v-form>
-        <v-btn @click="login">Log in</v-btn>
+        <v-btn @click="login">Click to Log in</v-btn>
         <div>
-            <h1>---</h1>
+            <h1>Register your Restaurant:</h1>
         </div>
-        <v-btn @click="goToRegister()">Register</v-btn>   
-        <div v-if="errorMessage"> 
+        <v-btn @click="goToRegister()">Click to go to Registration Form</v-btn>   
+        <!-- <div v-if="errorMessage"> 
             <p> User Not Found </p>
-        </div>            
+        </div>             -->
         </v-app>
     </div>
 </template>
@@ -90,7 +90,7 @@ export default {
                     this.$router.push('/restauranthome');
                 }).catch((error)=>{
                     console.log(error);
-                    this.errorMessage = "user not found";
+                    // this.errorMessage = "user not found";
                 })
             },
             goToRegister() {

@@ -26,7 +26,6 @@ posted orders which if clicked show up through the view order component through 
 //API IS FOODIEREST.ML/API/ORDER
 <template>
     <div>
-        <ClientLinks/>
         <ViewOrder/>
         <ConfirmOrder/>
         <footer>
@@ -36,7 +35,6 @@ posted orders which if clicked show up through the view order component through 
 </template>
 
 <script>
-import ClientLinks from '@/components/ClientLinks.vue'
 import ConfirmOrder from '@/components/ConfirmOrder.vue'
 import ViewOrder from '@/components/ViewOrder.vue'
 import ClientLogout from '@/components/ClientLogout.vue'
@@ -44,7 +42,6 @@ import ClientLogout from '@/components/ClientLogout.vue'
     export default {
         name:'CartView',
         components: {
-            ClientLinks,
             ViewOrder,
             ConfirmOrder,
             ClientLogout
@@ -53,5 +50,4 @@ import ClientLogout from '@/components/ClientLogout.vue'
 </script>
 
 <style lang="scss" scoped>
-
 </style>

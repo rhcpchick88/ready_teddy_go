@@ -6,11 +6,9 @@
 // a "back to create menu" link on their menu view? 
 //link rest view component
 <template>
-    <div>
-        <RestaurantLinks/>
-        <div id="app">
+    <div id="app">
         <v-app id="inspire">
-            <v-form v-model="valid">
+            <v-form>
             <v-container>
                 <v-row>
                 <v-col
@@ -61,27 +59,25 @@
                 </v-col>
 
                 </v-row>
-            <v-btn  @click="submitMenu(name, description, price, imageUrl)"> Submit menu item </v-btn>
+            <v-btn  @click="submitMenu(name, description, price, imageUrl)"> Submit menu item </v-btn> |
+            <v-btn @click="goToMenu()"> View menu</v-btn>
             </v-container>
             </v-form>
-        </v-app>
-        </div>
-        <footer>
-            <RestaurantLogout/>
-        </footer>
+            <footer>
+                <RestaurantLogout/>
+            </footer>
+        </v-app>         
     </div>
 </template>
 
 <script>
 import {useMainStore} from '@/stores/main.js'
 import {mapActions} from 'pinia'
-import RestaurantLinks from '@/components/RestaurantLinks.vue'
 import RestaurantLogout from '@/components/RestaurantLogout.vue'
 
     export default {
         name:'RestaurantMenu',
         components: {
-            RestaurantLinks,
             RestaurantLogout
         },
         data: () => ({
@@ -106,7 +102,10 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
             },
             handleError(response){
                 console.log(response);
-            }
+            },
+            goToMenu() {
+                this.$router.push('/menu')
+            }            
         },
         mounted () {
             useMainStore().$onAction(({name, after})=>{

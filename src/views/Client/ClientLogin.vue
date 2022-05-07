@@ -10,7 +10,7 @@
 
 <template>
     <div>
-        <h1>Client Login Page</h1>
+        <h1>Log in here:</h1>
         <v-app id="inspire">
             <v-form v-model="valid">
             <v-container>
@@ -41,11 +41,11 @@
                 </v-row>
             </v-container>
             </v-form>
-        <v-btn @click="login">Log in</v-btn>
+        <v-btn @click="login">Click to Log in</v-btn>
         <div>
-            <h1>---</h1>
+            <h1>Register your account here:</h1>
         </div>
-        <v-btn @click="goToRegister()">Register</v-btn>   
+        <v-btn @click="goToRegister()">Click to go to Registration Form:</v-btn>   
         <div v-if="errorMessage"> 
             <p> User Not Found </p>
         </div>            

@@ -16,10 +16,9 @@
 
 <template>
     <div>
-        <PublicLinks/>
     <div id="app">
     <v-app id="inspire">
-        <v-form v-model="valid">
+        <v-form>
         <v-container>
             <v-row>
             <v-col
@@ -121,14 +120,10 @@
 <script>
 import {useMainStore} from '@/stores/main.js'
 import {mapActions} from 'pinia'
-import PublicLinks from '@/components/PublicLinks.vue'
 
 
     export default {
         name: 'RestaurantRegister',
-        components: {
-            PublicLinks
-        },
         data: () => ({
             name:'',
             address:'',

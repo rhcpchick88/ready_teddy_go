@@ -93,6 +93,79 @@ export const useMainStore = defineStore('main',{
         },
         menuCreateAlert(error){
             return (error)
-        }
+        },
+        getRestaurantInfo(name, address, bannerURL, bio, city, email, phoneNum, profileURL, restaurantId){
+            axios.request({
+                headers: {
+                    "token" : cookies.get('restaurantToken'),
+                    "x-api-key" : process.env.VUE_APP_API_KEY
+                },
+                url:process.env.VUE_APP_API_URL+"restaurant",
+                method : "GET",
+                data: {
+                    name,
+                    address,
+                    bannerURL,
+                    bio,
+                    city,
+                    email,
+                    phoneNum,
+                    profileURL,
+                    restaurantId
+                }
+            }).then((response)=>{
+                cookies.get('restaurantToken');
+                console.log(response);
+            }).catch((error)=>{
+                console.log(error.response.data);
+                this.getRestaurantInfoAlert(error.response);
+            })
+        },
+        getRestaurantMenuInfo(name, description, price, imageUrl, menuId, restaurantId){
+            axios.request({
+                headers: {
+                    "x-api-key" : process.env.VUE_APP_API_KEY
+                },
+                url:process.env.VUE_APP_API_URL+"restaurant",
+                method : "GET",
+                data: {
+                    name,
+                    description,
+                    price,
+                    imageUrl,
+                    menuId,
+                    restaurantId
+                }
+            }).then((response)=>{
+                cookies.get('restaurantToken');
+                console.log(response);
+            }).catch((error)=>{
+                console.log(error.response.data);
+                this.getRestaurantMenuInfoAlert(error.response);
+            })
+        },
+        getClientInfo(email, username, firstName, lastName, pictureUrl){
+            axios.request({
+                headers: {
+                    "token" : cookies.get('clientToken'),
+                    "x-api-key" : process.env.VUE_APP_API_KEY
+                },
+                url:process.env.VUE_APP_API_URL+"client",
+                method : "GET",
+                data: {
+                    email,
+                    username,
+                    firstName,
+                    lastName,
+                    pictureUrl
+                }
+            }).then((response)=>{
+                cookies.get('clientToken');
+                console.log(response);
+            }).catch((error)=>{
+                console.log(error.response.data);
+                this.getClientInfoAlert(error.response);
+            })
+        },                
     }
 })

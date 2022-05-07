@@ -10,7 +10,6 @@ client home page  welcome ______ client name
 
 <template>
     <div>
-        <ClientLinks/>
         <h1 >Welcome, </h1>
         <footer>
             <ClientLogout/>
@@ -19,16 +18,11 @@ client home page  welcome ______ client name
 </template>
 
 <script>
-
-
-
-import ClientLinks from '@/components/ClientLinks.vue'
 import ClientLogout from '@/components/ClientLogout.vue'
 
     export default {
         name: 'ClientHome',
         components:{
-            ClientLinks,
             ClientLogout
         },
     }

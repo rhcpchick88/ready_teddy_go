@@ -16,7 +16,6 @@
 
 <template>
     <div>
-        <PublicLinks/>
     <div id="app">
     <v-app id="inspire">
         <v-form v-model="valid">
@@ -106,14 +105,10 @@
 <script>
 import {useMainStore} from '@/stores/main.js'
 import {mapActions} from 'pinia'
-import PublicLinks from '@/components/PublicLinks.vue'
 
 
     export default {
         name: 'ClientRegister',
-        components: {
-            PublicLinks
-        },
         data: () => ({
             email:'',
             username:'',

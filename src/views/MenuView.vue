@@ -6,33 +6,62 @@
 //they can add it to the cart list 
 // ALSO do v-if for logout footer.
 <template>
-    <div>
-        <div v-if=clientLogin()><ClientLinks/></div>
-        <div v-else-if=restaurantLogin()><RestaurantLinks/></div>
-        <div>
+    <div id="app">
+        <v-app id="inspire">
+            <v-simple-table>
+                <template v-slot:default>
+                    <tbody>
+                        <tr>
+                            <td>Item</td>
+                            <td>{{getRestaurantMenuInfo(name)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
+                            <td>{{getRestaurantMenuInfo(description)}}</td>
+                        </tr>                            
+                        <tr>
+                            <td>Price</td>
+                            <td>{{getRestaurantMenuInfo(price)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Image</td>
+                            <td>{{getRestaurantMenuInfo(imageUrl)}}</td>
+                        </tr>
+                    </tbody>
+                </template>
+            </v-simple-table>
             <footer v-if=restaurantLogin()><RestaurantLogout/></footer>
-            <footer v-if=clientLogin()><ClientLogout/></footer>
-        </div>
+            <footer v-if=clientLogin()><ClientLogout/></footer>         
+        </v-app>   
     </div>
 </template>
 
 <script>
+import {useMainStore} from '@/stores/main.js'
+import {mapActions} from 'pinia'
+
 import cookies from 'vue-cookies'
 
-import RestaurantLinks from '@/components/RestaurantLinks.vue'
-import ClientLinks from '@/components/ClientLinks.vue'
 import RestaurantLogout from '@/components/RestaurantLogout.vue'
 import ClientLogout from '@/components/ClientLogout.vue'
 
     export default {
         name: 'MenuView',
         components: {
-            RestaurantLinks,
-            ClientLinks,
             RestaurantLogout,
             ClientLogout
         },
+        data: () => ({
+            name:'',
+            description:'',
+            price:'',
+            imageUrl:'',
+        }),        
         methods: {
+            ...mapActions (useMainStore, ['getRestaurantMenuInfo']),
+            handleError(response){
+                console.log(response);
+            },            
             clientLogin() {
                 return cookies.get('clientToken')
             },
@@ -40,6 +69,16 @@ import ClientLogout from '@/components/ClientLogout.vue'
                 return cookies.get('restaurantToken')
             }
         },
+        mounted () {
+            useMainStore().$onAction(({name, after})=>{
+                if (name == "getRestaurantMenuInfoAlert"){
+                    console.log("handling");
+                    after((response)=>{
+                        this.handleError(response);
+                    })
+                }
+            })
+        }        
     }
 </script>
 

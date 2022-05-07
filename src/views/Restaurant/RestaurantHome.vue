@@ -12,8 +12,7 @@
 
 <template>
     <div>
-        <RestaurantLinks/>
-        <h1>I'm logged in!</h1>
+        <h1>{{getRestaurantInfo(name)}}I'm logged in!</h1>
         <footer>
             <RestaurantLogout/>
         </footer>
@@ -21,14 +20,34 @@
 </template>
 
 <script>
-import RestaurantLinks from '@/components/RestaurantLinks.vue'
+import {useMainStore} from '@/stores/main.js'
+import {mapActions} from 'pinia'
+
 import RestaurantLogout from '@/components/RestaurantLogout.vue'
 
     export default {
         name:'RestaurantHome',
         components:{
-            RestaurantLinks,
             RestaurantLogout
+        },
+        data: () => ({
+            name:'',
+        }),
+        methods: {
+            ...mapActions (useMainStore, ['getRestaurantInfo']),
+            handleError(response){
+                console.log(response);
+            }
+        },
+        mounted () {
+            useMainStore().$onAction(({name, after})=>{
+                if (name == "menuCreateAlert"){
+                    console.log("handling");
+                    after((response)=>{
+                        this.handleError(response);
+                    })
+                }
+            })
         }
     }
 </script>
