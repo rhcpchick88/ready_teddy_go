@@ -21,23 +21,23 @@
                     <tbody>
                         <tr>
                             <td>First Name</td>
-                            <td>{{getClientInfo()}}</td>
+                            <td>{{clientInfo.firstName}}</td>
                         </tr>
                         <tr>
                             <td>Last name</td>
-                            <td>{{getClientInfo()}}</td>
+                            <td>{{clientInfo.lastName}}</td>
                         </tr>                            
                         <tr>
                             <td>Email</td>
-                            <td>{{getClientInfo()}}</td>
+                            <td>{{clientInfo.email}}</td>
                         </tr>
                         <tr>
                             <td>Username</td>
-                            <td>{{getClientInfo()}}</td>
+                            <td>{{clientInfo.username}}</td>
                         </tr>
                         <tr>
                             <td>Picture</td>
-                            <td>{{getClientInfo()}}</td>
+                            <td>{{clientInfo.pictureUrl}}</td>
                         </tr>
                     </tbody>
                 </template>
@@ -52,7 +52,7 @@
 
 <script>
 import {useClientStore} from '@/stores/client.js'
-import {mapActions} from 'pinia'
+import {mapState, mapActions} from 'pinia'
 
 import ClientLogout from '@/components/ClientLogout.vue'
 
@@ -61,11 +61,17 @@ import ClientLogout from '@/components/ClientLogout.vue'
         components: {
             ClientLogout
         },
+        computed:{
+            ...mapState (useClientStore, ['clientInfo'])
+        },
         methods: {
             ...mapActions (useClientStore, ['getClientInfo']),
             handleError(response){
                 console.log(response);
             }
+        },
+        beforeMount(){
+            this.getClientInfo()
         },
         mounted () {
             useClientStore().$onAction(({name, after})=>{

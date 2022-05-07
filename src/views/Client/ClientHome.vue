@@ -10,7 +10,7 @@ client home page  welcome ______ client name
 
 <template>
     <div>
-        <h1 >Welcome, {{getClientInfo() }}</h1>
+        <h1 >Welcome, {{clientInfo.firstName}}</h1>
         <footer>
             <ClientLogout/>
         </footer>
@@ -19,7 +19,7 @@ client home page  welcome ______ client name
 
 <script>
 import {useClientStore} from '@/stores/client.js'
-import {mapActions} from 'pinia'
+import {mapState, mapActions} from 'pinia'
 
 
 import ClientLogout from '@/components/ClientLogout.vue'
@@ -29,11 +29,17 @@ import ClientLogout from '@/components/ClientLogout.vue'
         components:{
             ClientLogout
         }, 
+        computed: {
+            ...mapState (useClientStore,['clientInfo'])
+        },
         methods: {
             ...mapActions (useClientStore, ['getClientInfo']),
             handleError(response){
                 console.log(response);
             }
+        },
+        beforeMount(){
+            this.getClientInfo()
         },
         mounted () {
             useClientStore().$onAction(({name, after})=>{

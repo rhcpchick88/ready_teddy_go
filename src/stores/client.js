@@ -6,11 +6,7 @@ import {router} from '@/router'
 export const useClientStore = defineStore('main',{
     state : () => {
         return{
-            username: undefined,
-            firstName: undefined,
-            lastName: undefined,
-            email: undefined,
-            pictureUrl: undefined
+            clientInfo : {}
         }
         
     },
@@ -47,12 +43,13 @@ export const useClientStore = defineStore('main',{
             axios.request({
                 headers: {
                     "token" : cookies.get('clientToken'),
-                    "x-api-key" : process.env.VUE_APP_API_KEY
+                    "x-api-key" : process.env.VUE_APP_API_KEY,
                 },
                 url:process.env.VUE_APP_API_URL+"client",
                 method : "GET",
             }).then((response)=>{
-                console.log(response.data[0].firstName);
+                console.log(response);
+                this.clientInfo = response.data[0]
             }).catch((error)=>{
                 console.log(error.response.data);
                 this.getClientInfoAlert(error.response);
