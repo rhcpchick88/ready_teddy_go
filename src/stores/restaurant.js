@@ -4,42 +4,13 @@ import cookies from 'vue-cookies';
 import {router} from '@/router'
 
 
-export const useMainStore = defineStore('main',{
+export const useRestaurantStore = defineStore('main',{
     state : () => {
         return{
         }
         
     },
-    actions: {
-        submitClient(username, firstName, lastName, email, password, pictureUrl){
-            axios.request({
-                headers: {
-                    "x-api-key" : process.env.VUE_APP_API_KEY
-                },
-                url:process.env.VUE_APP_API_URL+"client",
-                method : "POST",
-                data: {
-                    username ,
-                    firstName,
-                    lastName,
-                    email,
-                    password,
-                    pictureUrl
-                }
-                
-            }).then((response)=>{
-                cookies.set('clientToken', response.data.token);
-                console.log(cookies.get('clientToken'));
-                router.push('/clientprofile');
-            }).catch((error)=>{
-                console.log(error.response.data);
-                this.userRegisterAlert(error.response);
-            })
-        },
-        userRegisterAlert(error){
-            return (error)
-        },
-        submitRestaurant(name, address, bio, city, email, password, phoneNum){
+    submitRestaurant(name, address, bio, city, email, password, phoneNum){
             axios.request({
                 headers: {
                     "x-api-key" : process.env.VUE_APP_API_KEY
@@ -144,28 +115,4 @@ export const useMainStore = defineStore('main',{
                 this.getRestaurantMenuInfoAlert(error.response);
             })
         },
-        getClientInfo(email, username, firstName, lastName, pictureUrl){
-            axios.request({
-                headers: {
-                    "token" : cookies.get('clientToken'),
-                    "x-api-key" : process.env.VUE_APP_API_KEY
-                },
-                url:process.env.VUE_APP_API_URL+"client",
-                method : "GET",
-                data: {
-                    email,
-                    username,
-                    firstName,
-                    lastName,
-                    pictureUrl
-                }
-            }).then((response)=>{
-                cookies.get('clientToken');
-                console.log(response);
-            }).catch((error)=>{
-                console.log(error.response.data);
-                this.getClientInfoAlert(error.response);
-            })
-        },                
-    }
 })

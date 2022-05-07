@@ -10,7 +10,7 @@ client home page  welcome ______ client name
 
 <template>
     <div>
-        <h1 >Welcome, </h1>
+        <h1 >Welcome, {{getClientInfo() }}</h1>
         <footer>
             <ClientLogout/>
         </footer>
@@ -18,13 +18,33 @@ client home page  welcome ______ client name
 </template>
 
 <script>
+import {useClientStore} from '@/stores/client.js'
+import {mapActions} from 'pinia'
+
+
 import ClientLogout from '@/components/ClientLogout.vue'
 
     export default {
         name: 'ClientHome',
         components:{
             ClientLogout
+        }, 
+        methods: {
+            ...mapActions (useClientStore, ['getClientInfo']),
+            handleError(response){
+                console.log(response);
+            }
         },
+        mounted () {
+            useClientStore().$onAction(({name, after})=>{
+                if (name == "getClientInfoAlert"){
+                    console.log("handling");
+                    after((response)=>{
+                        this.handleError(response);
+                    })
+                }
+            })
+        }             
     }
 
 </script>

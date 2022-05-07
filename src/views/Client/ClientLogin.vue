@@ -10,9 +10,9 @@
 
 <template>
     <div>
-        <h1>Log in here:</h1>
         <v-app id="inspire">
-            <v-form v-model="valid">
+            <h1>Log in here:</h1>
+            <v-form>
             <v-container>
                 <v-row>
                     <v-col
@@ -42,13 +42,11 @@
             </v-container>
             </v-form>
         <v-btn @click="login">Click to Log in</v-btn>
-        <div>
-            <h1>Register your account here:</h1>
-        </div>
+        <h1>Register your account here:</h1>
         <v-btn @click="goToRegister()">Click to go to Registration Form:</v-btn>   
-        <div v-if="errorMessage"> 
+        <!-- <div v-if="errorMessage"> 
             <p> User Not Found </p>
-        </div>            
+        </div>             -->
         </v-app>
     </div>
 </template>

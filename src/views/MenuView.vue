@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import {useMainStore} from '@/stores/main.js'
+import {useRestaurantStore} from '@/stores/restaurant.js'
 import {mapActions} from 'pinia'
 
 import cookies from 'vue-cookies'
@@ -58,7 +58,7 @@ import ClientLogout from '@/components/ClientLogout.vue'
             imageUrl:'',
         }),        
         methods: {
-            ...mapActions (useMainStore, ['getRestaurantMenuInfo']),
+            ...mapActions (useRestaurantStore, ['getRestaurantMenuInfo']),
             handleError(response){
                 console.log(response);
             },            
@@ -70,7 +70,7 @@ import ClientLogout from '@/components/ClientLogout.vue'
             }
         },
         mounted () {
-            useMainStore().$onAction(({name, after})=>{
+            useRestaurantStore().$onAction(({name, after})=>{
                 if (name == "getRestaurantMenuInfoAlert"){
                     console.log("handling");
                     after((response)=>{

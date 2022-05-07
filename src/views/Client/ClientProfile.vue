@@ -21,23 +21,23 @@
                     <tbody>
                         <tr>
                             <td>First Name</td>
-                            <td>{{getClientInfo(firstName)}}</td>
+                            <td>{{getClientInfo()}}</td>
                         </tr>
                         <tr>
                             <td>Last name</td>
-                            <td>{{getClientInfo(lastName)}}</td>
+                            <td>{{getClientInfo()}}</td>
                         </tr>                            
                         <tr>
                             <td>Email</td>
-                            <td>{{getClientInfo(email)}}</td>
+                            <td>{{getClientInfo()}}</td>
                         </tr>
                         <tr>
                             <td>Username</td>
-                            <td>{{getClientInfo(username)}}</td>
+                            <td>{{getClientInfo()}}</td>
                         </tr>
                         <tr>
                             <td>Picture</td>
-                            <td>{{getClientInfo(pictureUrl)}}</td>
+                            <td>{{getClientInfo()}}</td>
                         </tr>
                     </tbody>
                 </template>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import {useMainStore} from '@/stores/main.js'
+import {useClientStore} from '@/stores/client.js'
 import {mapActions} from 'pinia'
 
 import ClientLogout from '@/components/ClientLogout.vue'
@@ -61,21 +61,14 @@ import ClientLogout from '@/components/ClientLogout.vue'
         components: {
             ClientLogout
         },
-        data: () => ({
-            email:'',
-            username:'',
-            firstName:'',
-            lastName:'',
-            pictureUrl:undefined
-        }),
         methods: {
-            ...mapActions (useMainStore, ['getClientInfo']),
+            ...mapActions (useClientStore, ['getClientInfo']),
             handleError(response){
                 console.log(response);
             }
         },
         mounted () {
-            useMainStore().$onAction(({name, after})=>{
+            useClientStore().$onAction(({name, after})=>{
                 if (name == "getClientInfoAlert"){
                     console.log("handling");
                     after((response)=>{

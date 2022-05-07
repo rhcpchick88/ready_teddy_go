@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import {useMainStore} from '@/stores/main.js'
+import {useRestaurantStore} from '@/stores/restaurant.js'
 import {mapActions} from 'pinia'
 import RestaurantLogout from '@/components/RestaurantLogout.vue'
 
@@ -96,7 +96,7 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
             ]
         }),
         methods: {
-            ...mapActions (useMainStore, ['submitMenu']),
+            ...mapActions (useRestaurantStore, ['submitMenu']),
             handleMenuItem() {
                 this.submitForm(this.name, this.description, this.price, this.imageUrl);
             },
@@ -108,7 +108,7 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
             }            
         },
         mounted () {
-            useMainStore().$onAction(({name, after})=>{
+            useRestaurantStore().$onAction(({name, after})=>{
                 if (name == "menuCreateAlert"){
                     console.log("handling");
                     after((response)=>{

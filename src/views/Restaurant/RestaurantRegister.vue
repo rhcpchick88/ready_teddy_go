@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import {useMainStore} from '@/stores/main.js'
+import {useRestaurantStore} from '@/stores/restaurant.js'
 import {mapActions} from 'pinia'
 
 
@@ -154,7 +154,7 @@ import {mapActions} from 'pinia'
             ],             
         }),
         methods: {
-            ...mapActions(useMainStore,['submitRestaurant']),
+            ...mapActions(useRestaurantStore,['submitRestaurant']),
             handleRestaurantRegistration() {
                 //Some kind of form validation
                 this.submitForm(this.name, this.address, this.bio, this.city, this.email, this.password, this.phoneNum);
@@ -164,7 +164,7 @@ import {mapActions} from 'pinia'
             }
         },
         mounted () {
-            useMainStore().$onAction(({name, after})=>{
+            useRestaurantStore().$onAction(({name, after})=>{
                 if (name == "restaurantRegisterAlert"){
                     console.log("handling");
                     after((response)=>{

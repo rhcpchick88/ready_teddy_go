@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import {useMainStore} from '@/stores/main.js'
+import {useClientStore} from '@/stores/client.js'
 import {mapActions} from 'pinia'
 
 
@@ -135,7 +135,7 @@ import {mapActions} from 'pinia'
             ],                  
         }),
     methods: {
-        ...mapActions(useMainStore,['submitClient']),
+        ...mapActions(useClientStore,['submitClient']),
         handleUserRegistration() {
             //Some kind of form validation
             this.submitForm(this.username, this.firstName, this.lastName, this.email, this.password, this.pictureUrl);
@@ -145,7 +145,7 @@ import {mapActions} from 'pinia'
         }
     },
     mounted () {
-        useMainStore().$onAction(({name, after})=>{
+        useClientStore().$onAction(({name, after})=>{
             if (name == "userRegisterAlert"){
                 console.log("handling");
                 after((response)=>{
