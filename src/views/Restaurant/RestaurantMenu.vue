@@ -60,9 +60,10 @@
 
                 </v-row>
             <v-btn  @click="submitMenu(name, description, price, imageUrl)"> Submit menu item </v-btn> |
-            <v-btn @click="goToMenu()"> View menu</v-btn>
+            <v-btn @click="goToMenu()"> View menus</v-btn>
             </v-container>
             </v-form>
+            <RestaurantMenuView/>
             <footer>
                 <RestaurantLogout/>
             </footer>
@@ -73,11 +74,14 @@
 <script>
 import {useRestaurantStore} from '@/stores/restaurant.js'
 import {mapActions} from 'pinia'
+
+import RestaurantMenuView from '@/components/RestaurantMenuView.vue'
 import RestaurantLogout from '@/components/RestaurantLogout.vue'
 
     export default {
         name:'RestaurantMenu',
         components: {
+            RestaurantMenuView,
             RestaurantLogout
         },
         data: () => ({
@@ -105,18 +109,8 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
             },
             goToMenu() {
                 this.$router.push('/menu')
-            }            
+            },           
         },
-        mounted () {
-            useRestaurantStore().$onAction(({name, after})=>{
-                if (name == "menuCreateAlert"){
-                    console.log("handling");
-                    after((response)=>{
-                        this.handleError(response);
-                    })
-                }
-            })
-        }
     }
 </script>
 

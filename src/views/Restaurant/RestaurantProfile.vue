@@ -21,27 +21,27 @@
                     <tbody>
                         <tr>
                             <td>Restaurant name</td>
-                            <td>{{getRestaurantInfo(name)}}</td>
+                            <td>{{restaurantInfo.name}}</td>
                         </tr>
                         <tr>
                             <td>Address</td>
-                            <td>{{getRestaurantInfo(address)}}</td>
+                            <td>{{restaurantInfo.address}}</td>
                         </tr>                            
                         <tr>
                             <td>Bio</td>
-                            <td>{{getRestaurantInfo(bio)}}</td>
+                            <td>{{restaurantInfo.bio}}</td>
                         </tr>
                         <tr>
                             <td>City</td>
-                            <td>{{getRestaurantInfo(city)}}</td>
+                            <td>{{restaurantInfo.city}}</td>
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td>{{getRestaurantInfo(email)}}</td>
+                            <td>{{restaurantInfo.email}}</td>
                         </tr>
                         <tr>
                             <td>Phone Number</td>
-                            <td>{{getRestaurantInfo(phoneNum)}}</td>
+                            <td>{{restaurantInfo.phoneNum}}</td>
                         </tr>
                     </tbody>
                 </template>
@@ -55,7 +55,7 @@
 
 <script>
 import {useRestaurantStore} from '@/stores/restaurant.js'
-import {mapActions} from 'pinia'
+import {mapState, mapActions} from 'pinia'
 
 import RestaurantLogout from '@/components/RestaurantLogout.vue'
 
@@ -64,19 +64,17 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
         components:{
             RestaurantLogout
         },
-        data: () => ({
-            name:'',
-            address:'',
-            bio:'',
-            city:'',
-            email:'',
-            phoneNum:''
-        }),
+        computed: {
+            ...mapState (useRestaurantStore, ['restaurantInfo'])
+        },
         methods: {
             ...mapActions (useRestaurantStore, ['getRestaurantInfo']),
             handleError(response){
                 console.log(response);
             }
+        },
+        beforeMount(){
+            this.getRestaurantInfo()
         },
         mounted () {
             useRestaurantStore().$onAction(({name, after})=>{

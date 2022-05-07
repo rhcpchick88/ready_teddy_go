@@ -12,7 +12,7 @@
 
 <template>
     <div>
-        <h1>{{getRestaurantInfo(name)}}I'm logged in!</h1>
+        <h1>Welcome, {{restaurantInfo.name}} </h1>
         <footer>
             <RestaurantLogout/>
         </footer>
@@ -21,7 +21,7 @@
 
 <script>
 import {useRestaurantStore} from '@/stores/restaurant.js'
-import {mapActions} from 'pinia'
+import {mapState, mapActions} from 'pinia'
 
 import RestaurantLogout from '@/components/RestaurantLogout.vue'
 
@@ -30,14 +30,17 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
         components:{
             RestaurantLogout
         },
-        data: () => ({
-            name:'',
-        }),
+        computed: {
+            ...mapState (useRestaurantStore, ['restaurantInfo'])
+        },
         methods: {
             ...mapActions (useRestaurantStore, ['getRestaurantInfo']),
             handleError(response){
                 console.log(response);
             }
+        },
+        beforeMount(){
+            this.getRestaurantInfo()
         },
         mounted () {
             useRestaurantStore().$onAction(({name, after})=>{
