@@ -85,6 +85,7 @@ export default {
                     },                    
                 }).then((response)=>{
                     cookies.set('clientToken', response.data.token)
+                    cookies.set('clientId', response.data.token)
                     console.log(response);
                     this.$router.push('/clienthome');
                 }).catch((error)=>{

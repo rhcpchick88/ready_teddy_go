@@ -3,14 +3,20 @@ import { defineStore } from "pinia";
 import cookies from 'vue-cookies';
 import {router} from '@/router'
 
+//this store is for restaurant profile info, login info, and menu creation.
+//all functions require a restaurant token except for the registration.
 
-export const useRestaurantStore = defineStore('main',{
+export const useRestaurantStore = defineStore('restaurant',{
     state : () => {
         return{
-            restaurantInfo: {}
+            restaurantInfo: {},
+            restaurantId:undefined //for grabbing profile information 
         } 
     },
     actions:{
+
+        //register a new restaurant
+
         submitRestaurant(name, address, bio, city, email, password, phoneNum){
                 axios.request({
                     headers: {
@@ -40,31 +46,9 @@ export const useRestaurantStore = defineStore('main',{
             restaurantRegisterAlert(error){
                 return (error)
             },
-            submitMenu(name, description, price, imageUrl){
-                axios.request({
-                    headers: {
-                        "token" : cookies.get('restaurantToken'),
-                        "x-api-key" : process.env.VUE_APP_API_KEY
-                    },
-                    url:process.env.VUE_APP_API_URL+"menu",
-                    method : "POST",
-                    data: {
-                        name,
-                        description,
-                        price,
-                        imageUrl
-                    }
-                }).then((response)=>{
-                    cookies.get('restaurantToken');
-                    console.log(response);
-                }).catch((error)=>{
-                    console.log(error.response.data);
-                    this.menuCreateAlert(error.response);
-                })
-            },
-            menuCreateAlert(error){
-                return (error)
-            },
+
+//requesting restaurant profile information to display on home page, profile page, and menu page
+
             getRestaurantInfo(){
                 axios.request({
                     headers: {
@@ -74,12 +58,34 @@ export const useRestaurantStore = defineStore('main',{
                     url:process.env.VUE_APP_API_URL+"restaurant",
                     method : "GET",
                 }).then((response)=>{
+                    cookies.get('restaurantToken')
                     console.log(response);
-                    this.restaurantInfo = response.data[0]
+                    this.restaurantInfo = response.data
                 }).catch((error)=>{
                     console.log(error.response.data);
                     this.getRestaurantInfoAlert(error.response);
                 })
             },
+            getRestaurantId(restaurantId){
+                axios.request({
+                    headers: {
+                        "token" : cookies.get('restaurantToken'),
+                        "x-api-key" : process.env.VUE_APP_API_KEY
+                    },
+                    url:process.env.VUE_APP_API_URL+"restaurant",
+                    method : "GET",
+                    params: {
+                        restaurantId
+                    }
+                }).then((response)=>{
+                    cookies.get('restaurantToken')
+                    console.log(response.data[0]);
+                    this.restaurantId = response.data.restaurantId
+                    this.restaurantInfo=response.data[0]
+                }).catch((error)=>{
+                    console.log(error.response.data);
+                    this.getRestaurantIdAlert(error.response);
+                })
+            },            
     }
 })

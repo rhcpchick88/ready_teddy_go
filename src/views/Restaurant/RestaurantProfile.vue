@@ -21,7 +21,7 @@
                     <tbody>
                         <tr>
                             <td>Restaurant name</td>
-                            <td>{{restaurantInfo.name}}</td>
+                            <td :key="restaurantId">{{restaurantInfo.name}}</td>
                         </tr>
                         <tr>
                             <td>Address</td>
@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import cookies from 'vue-cookies'
 import {useRestaurantStore} from '@/stores/restaurant.js'
 import {mapState, mapActions} from 'pinia'
 
@@ -65,28 +66,33 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
             RestaurantLogout
         },
         computed: {
-            ...mapState (useRestaurantStore, ['restaurantInfo'])
+            ...mapState (useRestaurantStore, ['restaurantInfo', 'restaurantId'])
         },
         methods: {
-            ...mapActions (useRestaurantStore, ['getRestaurantInfo']),
+            ...mapActions (useRestaurantStore, ['getRestaurantInfo','getRestaurantId']),
             handleError(response){
                 console.log(response);
             }
         },
         beforeMount(){
-            this.getRestaurantInfo()
+            this.getRestaurantId(cookies.get('restaurantId'))
         },
         mounted () {
             useRestaurantStore().$onAction(({name, after})=>{
-                if (name == "menuCreateAlert"){
+                if (name == "getRestaurantIdAlert"){
                     console.log("handling");
                     after((response)=>{
                         this.handleError(response);
                     })
+                }else if (name == "getRestaurantInfoAlert") {
+                    console.log("handling");
+                    after ((response)=> {
+                        this.handleError(response)
+                    })
                 }
-            })
+        })
         }
-    }
+}
 </script>
 
 <style lang="scss" scoped>

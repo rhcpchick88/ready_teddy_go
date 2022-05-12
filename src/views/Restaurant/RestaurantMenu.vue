@@ -61,9 +61,12 @@
                 </v-row>
             <v-btn  @click="submitMenu(name, description, price, imageUrl)"> Submit menu item </v-btn> |
             <v-btn @click="goToMenu()"> View menus</v-btn>
+            <ul>
+                <li v-for="menuItem in menuItems" :key="menuItem.restaurantId">
+                    {{menuItem.name}} - {{menuItem.description}} - {{menuItem.price}} - {{menuItem.menuId}} <v-btn @click="deleteMenuItem(menuItem.menuId)" :key="menuItem.menuId">Delete menu item</v-btn></li>
+            </ul>            
             </v-container>
             </v-form>
-            <RestaurantMenuView/>
             <footer>
                 <RestaurantLogout/>
             </footer>
@@ -72,16 +75,15 @@
 </template>
 
 <script>
+import {useMenuStore} from '@/stores/menu.js'
 import {useRestaurantStore} from '@/stores/restaurant.js'
-import {mapActions} from 'pinia'
+import {mapState, mapActions} from 'pinia'
 
-import RestaurantMenuView from '@/components/RestaurantMenuView.vue'
 import RestaurantLogout from '@/components/RestaurantLogout.vue'
 
     export default {
         name:'RestaurantMenu',
         components: {
-            RestaurantMenuView,
             RestaurantLogout
         },
         data: () => ({
@@ -89,6 +91,7 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
             description:'',
             price:'',
             imageUrl: undefined,
+            menuId:'',
             nameRules: [
             v => !!v || 'Item name is required'
             ],
@@ -99,6 +102,10 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
             v => !!v || 'Price is required'
             ]
         }),
+        computed: {
+            ...mapState (useMenuStore, ['menuItems','restaurantId',]),
+            ...mapState (useRestaurantStore,['restaurantInfo'])
+        },        
         methods: {
             ...mapActions (useRestaurantStore, ['submitMenu']),
             handleMenuItem() {
@@ -109,8 +116,15 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
             },
             goToMenu() {
                 this.$router.push('/menu')
-            },           
+            },
+            ...mapActions (useMenuStore, ['getMenuInfo','deleteMenuItem']),
+            handleStoreError(response){
+                console.log(response);
+            },                       
         },
+        beforeMount() {
+            this.getMenuInfo();
+        }        
     }
 </script>
 

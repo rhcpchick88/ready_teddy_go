@@ -84,8 +84,9 @@ export default {
                     },                    
                 }).then((response)=>{
                     cookies.set('restaurantToken', response.data.token)
-                    console.log(response);
-                    this.$router.push('/restauranthome');
+                    cookies.set('restaurantId', response.data.restaurantId)
+                    console.log(response+ response.data.restaurantId);
+                    this.$router.push('/restauranthome/');
                 }).catch((error)=>{
                     console.log(error);
                     // this.errorMessage = "user not found";

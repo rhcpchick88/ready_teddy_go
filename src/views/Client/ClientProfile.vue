@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import cookies from 'vue-cookies'
 import {useClientStore} from '@/stores/client.js'
 import {mapState, mapActions} from 'pinia'
 
@@ -62,16 +63,16 @@ import ClientLogout from '@/components/ClientLogout.vue'
             ClientLogout
         },
         computed:{
-            ...mapState (useClientStore, ['clientInfo'])
+            ...mapState (useClientStore, ['clientInfo', 'clientId'])
         },
         methods: {
-            ...mapActions (useClientStore, ['getClientInfo']),
+            ...mapActions (useClientStore, ['getClientInfo', 'getClientId']),
             handleError(response){
                 console.log(response);
             }
         },
         beforeMount(){
-            this.getClientInfo()
+            this.getClientId(cookies.get('clientId'))
         },
         mounted () {
             useClientStore().$onAction(({name, after})=>{
@@ -80,6 +81,11 @@ import ClientLogout from '@/components/ClientLogout.vue'
                     after((response)=>{
                         this.handleError(response);
                     })
+                }else if (name == "getClientIdAlert") {
+                    console.log("handling");
+                    after ((response)=> {
+                        this.handleError(response)
+                    })                    
                 }
             })
         }        

@@ -3,10 +3,11 @@ import { defineStore } from "pinia";
 import cookies from 'vue-cookies';
 import {router} from '@/router'
 
-export const useClientStore = defineStore('main',{
+export const useClientStore = defineStore('client',{
     state : () => {
         return{
-            clientInfo : {}
+            clientInfo : {},
+            clientId:undefined
         }
         
     },
@@ -48,12 +49,34 @@ export const useClientStore = defineStore('main',{
                 url:process.env.VUE_APP_API_URL+"client",
                 method : "GET",
             }).then((response)=>{
+                cookies.get('clientToken')
                 console.log(response);
-                this.clientInfo = response.data[0]
+                this.clientInfo = response.data
             }).catch((error)=>{
                 console.log(error.response.data);
                 this.getClientInfoAlert(error.response);
             })
         },
+        getClientId(clientId){
+            axios.request({
+                headers:{
+                    "token" : cookies.get('clientToken'),
+                    "x-api-key" : process.env.VUE_APP_API_KEY
+                },
+                url:process.env.VUE_APP_API_URL+"client",
+                method : "GET",  
+                params: {
+                    clientId
+                }
+            }).then((response)=>{
+                cookies.get('clientToken')
+                console.log(response.data[0])
+                this.clientId = response.data.clientId
+                this.clientInfo = response.data[0]
+            }).catch((error)=>{
+                console.log(error.response.data);
+                this.getClientIdAlert(error.response)
+            })
+        }
     },
 })   

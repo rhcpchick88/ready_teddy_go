@@ -3,7 +3,7 @@
 // // import cookies from 'vue-cookies';
 // // import {router} from '@/router'
 
-// export const useOrderStore = defineStore('main',{
+// export const useOrderStore = defineStore('orders',{
 //     state : () => {
 //         return{
 

@@ -4,7 +4,7 @@ import cookies from 'vue-cookies';
 import {router} from '@/router';
 
 
-export const useMenuStore = defineStore('main',{
+export const useMenuStore = defineStore('menu',{
     state : () => {
         return{
             menuItems: {},
@@ -29,6 +29,33 @@ export const useMenuStore = defineStore('main',{
                     console.log(error);
                     this.getRestaurantMenuInfoAlert(error.response);
                 })
+            },
+            //submit new menu items for your restaurant
+
+            submitMenu(name, description, price, imageUrl){
+                axios.request({
+                    headers: {
+                        "token" : cookies.get('restaurantToken'),
+                        "x-api-key" : process.env.VUE_APP_API_KEY
+                    },
+                    url:process.env.VUE_APP_API_URL+"menu",
+                    method : "POST",
+                    data: {
+                        name,
+                        description,
+                        price,
+                        imageUrl
+                    }
+                }).then((response)=>{
+                    cookies.get('restaurantToken');
+                    console.log(response);
+                }).catch((error)=>{
+                    console.log(error.response.data);
+                    this.menuCreateAlert(error.response);
+                })
+            },
+            menuCreateAlert(error){
+                return (error)
             },
             deleteMenuItem(menuId){
                 console.log(menuId);

@@ -24,10 +24,12 @@ import cookies from 'vue-cookies'
                     url: process.env.VUE_APP_API_URL + "restaurant-login",
                     method : "DELETE",
                     headers:{
+                        "token" : cookies.get('restaurantToken'),
                         "x-api-key" :process.env.VUE_APP_API_KEY
                     }                
                 }).then((response)=>{
-                    cookies.remove('restaurantToken', response.data.token)
+                    cookies.remove('restaurantToken',response.data.token)
+                    cookies.remove('restaurantId', response.data.token)
                     console.log(response);
                     this.$router.push('/');
                 }).catch((error)=>{
