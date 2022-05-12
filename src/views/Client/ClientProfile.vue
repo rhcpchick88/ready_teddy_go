@@ -43,6 +43,7 @@
                 </template>
             </v-simple-table>
             <footer>
+                <v-btn>Update profile</v-btn>                
                 <ClientLogout/>
             </footer>            
         </v-app>

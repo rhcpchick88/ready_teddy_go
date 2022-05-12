@@ -48,6 +48,12 @@ const routes = [
     component: () => import('../views/Client/ClientProfile.vue'),
     beforeEnter: clientAuth
   },
+  {    
+    path: '/clientupdateprofile',
+    name: 'client update profile',
+    component: () => import('../views/Client/ClientUpdateProfile.vue'),
+    beforeEnter: clientAuth
+  },  
   {
     path:'/cartview',
     name:'cart view',
@@ -74,6 +80,12 @@ const routes = [
     path: '/restaurantprofile',
     name: 'restaurant profile',
     component: () => import('../views/Restaurant/RestaurantProfile.vue'),
+    beforeEnter: restaurantAuth
+  },  
+  {    
+    path: '/restaurantupdateprofile',
+    name: 'restaurant update profile',
+    component: () => import('../views/Restaurant/RestaurantUpdateProfile.vue'),
     beforeEnter: restaurantAuth
   },  
   {    

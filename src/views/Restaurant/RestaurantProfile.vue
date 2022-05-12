@@ -47,6 +47,7 @@
                 </template>
             </v-simple-table>
             <footer>
+                <v-btn @click="goToUpdate()">Update profile</v-btn>
                 <RestaurantLogout/>
             </footer>            
         </v-app>                          
@@ -72,6 +73,9 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
             ...mapActions (useRestaurantStore, ['getRestaurantInfo','getRestaurantId']),
             handleError(response){
                 console.log(response);
+            },
+            goToUpdate(){
+                this.$router.push('/restaurantupdateprofile')
             }
         },
         beforeMount(){
