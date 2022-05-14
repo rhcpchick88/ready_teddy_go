@@ -6,13 +6,14 @@
                 <template v-slot:default>
                     <ul>
                         <li v-for="restaurantInfo in restaurantInfo" :key="restaurantInfo.restaurantId">
-                            {{restaurantInfo.name}} - {{restaurantInfo.bio}}
+                            {{restaurantInfo.name}} - {{restaurantInfo.address}} - {{restaurantInfo.bio}} - {{restaurantInfo.city}} - {{restaurantInfo.phoneNum}}
                         </li>
                     </ul>
                 </template>
             </v-simple-table>
             <footer v-if="restaurantLogin()"><RestaurantLogout/></footer>
-            <footer v-if="clientLogin()"><ClientLogout/></footer>         
+            <footer v-else-if="clientLogin()"><ClientLogout/></footer>
+            <footer v-else @click="goToLogin()"><v-btn>Login to order now!</v-btn></footer>        
         </v-app>   
     </div>
 </template>
@@ -45,6 +46,9 @@ import ClientLogout from '@/components/ClientLogout.vue'
             },
             restaurantLogin(){
                 return cookies.get('restaurantToken')
+            },
+            goToLogin(){
+                this.$router.push('/client')
             }
         },
         beforeMount(){
