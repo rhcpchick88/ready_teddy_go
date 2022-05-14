@@ -112,6 +112,11 @@ const routes = [
     component: () => import('../views/RestaurantView.vue')
   }, 
   {
+  path: '/menu/:restaurantId?',
+  name: 'menu',
+  component: () => import('../views/MenuView.vue')
+  }, 
+  {
     path: '/error',
     name: 'notfound',
     component: () => import ('../views/LoginError.vue')

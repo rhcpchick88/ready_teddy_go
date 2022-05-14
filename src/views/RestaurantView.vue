@@ -7,6 +7,7 @@
                     <ul>
                         <li v-for="restaurantInfo in restaurantInfo" :key="restaurantInfo.restaurantId">
                             {{restaurantInfo.name}} - {{restaurantInfo.address}} - {{restaurantInfo.bio}} - {{restaurantInfo.city}} - {{restaurantInfo.phoneNum}}
+                            <v-btn v-if="clientLogin()" @click="goToMenu()"> Order now! </v-btn>
                         </li>
                     </ul>
                 </template>
@@ -49,6 +50,9 @@ import ClientLogout from '@/components/ClientLogout.vue'
             },
             goToLogin(){
                 this.$router.push('/client')
+            },
+            goToMenu(){
+                this.$router.push('/menu/:restaurantId')
             }
         },
         beforeMount(){

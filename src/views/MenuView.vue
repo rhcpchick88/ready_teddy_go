@@ -1,4 +1,4 @@
-<!-- //this will have a function to show 
+//this will have a function to show 
 //what the page looks like when clicked on as public, restaurant, and client users. (3 V-IF)
 //link 3 components to this page : restaurant links, client links, and public links.
 //showing the restaurant view will show the restaurant links as well as the public menu
@@ -11,22 +11,14 @@
             <v-simple-table>
                 <template v-slot:default>
                     <tbody>
-                        <tr>
-                            <td>Item</td>
-                            <td>{{getRestaurantMenuInfo(name)}}</td>
-                        </tr>
-                        <tr>
-                            <td>Description</td>
-                            <td>{{getRestaurantMenuInfo(description)}}</td>
-                        </tr>                            
-                        <tr>
-                            <td>Price</td>
-                            <td>{{getRestaurantMenuInfo(price)}}</td>
-                        </tr>
-                        <tr>
-                            <td>Image</td>
-                            <td>{{getRestaurantMenuInfo(imageUrl)}}</td>
-                        </tr>
+                        <ul>
+                            <li v-for ="menuItem in menuItems" :key="menuItem.restaurantId">
+                            {{menuItem.name}}
+                            {{menuItem.description}}
+                            {{menuItem.price}}
+                            {{menuItem.imageUrl}}
+                            </li>
+                        </ul>
                     </tbody>
                 </template>
             </v-simple-table>
@@ -37,8 +29,8 @@
 </template>
 
 <script>
-import {useRestaurantStore} from '@/stores/restaurant.js'
-import {mapActions} from 'pinia'
+import {useMenuStore} from '@/stores/menu.js'
+import {mapActions, mapState} from 'pinia'
 
 import cookies from 'vue-cookies'
 
@@ -51,14 +43,11 @@ import ClientLogout from '@/components/ClientLogout.vue'
             RestaurantLogout,
             ClientLogout
         },
-        data: () => ({
-            name:'',
-            description:'',
-            price:'',
-            imageUrl:'',
-        }),        
+        computed:{
+            ...mapState (useMenuStore, ['menuItems', 'restaurantId'])
+        },      
         methods: {
-            ...mapActions (useRestaurantStore, ['getRestaurantMenuInfo']),
+            ...mapActions (useMenuStore, ['editMenuInfo', 'getMenuInfo']),
             handleError(response){
                 console.log(response);
             },            
@@ -69,9 +58,12 @@ import ClientLogout from '@/components/ClientLogout.vue'
                 return cookies.get('restaurantToken')
             }
         },
+        beforeMount(){
+            this.editMenuInfo()
+        },
         mounted () {
-            useRestaurantStore().$onAction(({name, after})=>{
-                if (name == "getRestaurantMenuInfoAlert"){
+            useMenuStore().$onAction(({name, after})=>{
+                if (name == "getMenuInfoAlert"){
                     console.log("handling");
                     after((response)=>{
                         this.handleError(response);
@@ -84,4 +76,4 @@ import ClientLogout from '@/components/ClientLogout.vue'
 
 <style lang="scss" scoped>
 
-</style> -->
+</style>
