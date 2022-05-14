@@ -1,3 +1,4 @@
+// Links on public view 
 <template>
     <div>
         <nav>

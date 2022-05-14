@@ -1,3 +1,4 @@
+//trying to access a page that you aren't logged in to see
 <template>
     <div>
         <h1>404 NOT AUTHORIZED</h1>

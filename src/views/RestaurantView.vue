@@ -7,7 +7,7 @@
                     <ul>
                         <li v-for="restaurantInfo in restaurantInfo" :key="restaurantInfo.restaurantId">
                             {{restaurantInfo.name}} - {{restaurantInfo.address}} - {{restaurantInfo.bio}} - {{restaurantInfo.city}} - {{restaurantInfo.phoneNum}}
-                            <v-btn v-if="clientLogin()" @click="goToMenu()"> Order now! </v-btn>
+                            <v-btn v-if="clientLogin()" @click="goToMenu(restaurantId)"> Order now! </v-btn>
                         </li>
                     </ul>
                 </template>
@@ -35,10 +35,10 @@ import ClientLogout from '@/components/ClientLogout.vue'
             ClientLogout
         },  
         computed:{
-            ...mapState (useRestaurantStore, ['restaurantInfo'])
+            ...mapState (useRestaurantStore, ['restaurantInfo', 'restaurantId'])
         },     
         methods: {
-            ...mapActions (useRestaurantStore, ['getRestaurantInfo']),
+            ...mapActions (useRestaurantStore, ['getRestaurantInfo', 'getRestaurantId']),
             handleError(response){
                 console.log(response);
             },            
