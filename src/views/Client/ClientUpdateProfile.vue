@@ -95,6 +95,7 @@
 
             </v-row>
         <v-btn  @click="updateClient(username, firstName, lastName, email, password, pictureUrl)"> Update profile </v-btn>
+        <v-btn  @click="deleteClient()"> Delete profile </v-btn>        
         </v-container>
         </v-form>
     </v-app>
@@ -135,7 +136,7 @@ import {mapActions} from 'pinia'
             ],                  
         }),
         methods: {
-            ...mapActions(useClientStore,['updateClient']),
+            ...mapActions(useClientStore,['updateClient', 'deleteClient']),
             handleUserRegistration() {
                 //Some kind of form validation
                 this.submitForm(this.username, this.firstName, this.lastName, this.email, this.password, this.pictureUrl);
@@ -150,6 +151,11 @@ import {mapActions} from 'pinia'
                     console.log("handling");
                     after((response)=>{
                         this.handleError(response);
+                    })
+                } else if (name == "clientDeleteAlert") {
+                    console.log("handling");
+                    after ((response)=> {
+                        this.handleError(response)
                     })
                 }
             });

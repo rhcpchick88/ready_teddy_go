@@ -94,6 +94,12 @@ const routes = [
     component: () => import('../views/Restaurant/RestaurantMenu.vue'),
     beforeEnter: restaurantAuth
   },  
+  {    
+    path: '/updatemenu',
+    name: 'updatemenu',
+    component: () => import('../views/Restaurant/RestaurantUpdateMenu.vue'),
+    beforeEnter: restaurantAuth
+  },   
   {
     path: '/orderview',
     name: 'order view',

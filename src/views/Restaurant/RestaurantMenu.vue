@@ -63,7 +63,7 @@
             <v-btn @click="goToMenu()"> View menus</v-btn>
             <ul>
                 <li v-for="menuItem in menuItems" :key="menuItem.restaurantId">
-                    {{menuItem.name}} - {{menuItem.description}} - {{menuItem.price}} - {{menuItem.menuId}} <v-btn @click="deleteMenuItem(menuItem.menuId)" :key="menuItem.menuId">Delete menu item</v-btn></li>
+                    {{menuItem.name}} - {{menuItem.description}} - {{menuItem.price}}<v-btn @click="deleteMenuItem(menuItem.menuId)" :key="menuItem.menuId">Delete menu item</v-btn></li>
             </ul>            
             </v-container>
             </v-form>
@@ -75,8 +75,9 @@
 </template>
 
 <script>
+import cookies from 'vue-cookies'
+
 import {useMenuStore} from '@/stores/menu.js'
-import {useRestaurantStore} from '@/stores/restaurant.js'
 import {mapState, mapActions} from 'pinia'
 
 import RestaurantLogout from '@/components/RestaurantLogout.vue'
@@ -103,11 +104,10 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
             ]
         }),
         computed: {
-            ...mapState (useMenuStore, ['menuItems']),
-            ...mapState (useRestaurantStore,['restaurantInfo'])
+            ...mapState (useMenuStore, ['menuItems', 'restaurantId']),
         },        
         methods: {
-            ...mapActions (useMenuStore, ['submitMenu']),
+            ...mapActions (useMenuStore, ['getMenuInfo', 'deleteMenuItem','submitMenu', 'editMenuInfo']),
             handleMenuItem() {
                 this.submitForm(this.name, this.description, this.price, this.imageUrl);
             },
@@ -117,13 +117,12 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
             goToMenu() {
                 this.$router.push('/menu')
             },
-            ...mapActions (useMenuStore, ['getMenuInfo','deleteMenuItem']),
             handleStoreError(response){
                 console.log(response);
             },                       
         },
         beforeMount() {
-            this.getMenuInfo();
+            this.editMenuInfo(cookies.get('restaurantId'))    
         }        
     }
 </script>

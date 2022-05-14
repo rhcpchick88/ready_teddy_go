@@ -8,10 +8,13 @@ export const useMenuStore = defineStore('menu',{
     state : () => {
         return{
             menuItems: {},
-            restaurantId: {},
+            restaurantId: undefined,
         } 
     },
     actions:{
+
+            //show menu info on client/public side
+
             getMenuInfo(){
                 axios.request({
                     headers: {
@@ -30,6 +33,31 @@ export const useMenuStore = defineStore('menu',{
                     this.getRestaurantMenuInfoAlert(error.response);
                 })
             },
+
+            //show menu info for editing on restaurant side
+
+            editMenuInfo(restaurantId){
+                axios.request({
+                    headers: {
+                        "x-api-key" : process.env.VUE_APP_API_KEY
+                    },
+                    url:process.env.VUE_APP_API_URL+"menu",
+                    method : "GET",
+                    params:{
+                        restaurantId
+                    }
+                }).then((response)=>{
+                    cookies.get('restaurantToken');
+                    console.log(response);
+                    this.menuItems = response.data;
+                    this.restaurantId = response.data.restaurantId
+                }).catch((error)=>{
+                    console.log(error);
+                    this.editMenuInfoAlert(error.response);
+                })
+            },            
+
+
             //submit new menu items for your restaurant
 
             submitMenu(name, description, price, imageUrl){
@@ -58,6 +86,9 @@ export const useMenuStore = defineStore('menu',{
             menuCreateAlert(error){
                 return (error)
             },
+
+            //delete a menu item
+
             deleteMenuItem(menuId){
                 console.log(menuId);
                 axios.request({

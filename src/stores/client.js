@@ -76,6 +76,33 @@ export const useClientStore = defineStore('client',{
             return (error)
         },
 
+        //delete client profile
+
+        deleteClient(){
+            axios.request({
+                headers: {
+                    "token" : cookies.get('clientToken'),
+                    "x-api-key" : process.env.VUE_APP_API_KEY
+                },
+                url:process.env.VUE_APP_API_URL+"client",
+                method : "DELETE",
+                data: {
+                    
+                }                
+            }).then((response)=>{
+                cookies.remove('clientToken', response.data.token);
+                cookies.remove('clientId', response.data.token);
+                console.log(response);
+                router.push('/');
+            }).catch((error)=>{
+                console.log(error.response.data);
+                this.clientDeleteAlert(error.response);
+            })
+        },
+        clientDeleteAlert(error){
+            return (error)
+        },
+
         //request for client information
 
         getClientInfo(){
