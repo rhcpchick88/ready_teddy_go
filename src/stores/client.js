@@ -30,6 +30,7 @@ export const useClientStore = defineStore('client',{
                 
             }).then((response)=>{
                 cookies.set('clientToken', response.data.token);
+                cookies.set('clientId', response.data.clientId)
                 console.log(cookies.get('clientToken'));
                 router.push('/clientprofile');
             }).catch((error)=>{

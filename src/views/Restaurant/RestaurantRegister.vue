@@ -53,7 +53,7 @@
                 v-model="bio">
                     <template v-slot:label>
                         <div>
-                            Bio<small> (Optional)</small>
+                            Bio
                         </div>
                     </template>
                 </v-text-field>
@@ -150,7 +150,7 @@ import {mapActions} from 'pinia'
             v => !!v || 'City is required'
             ],                  
             phoneRules: [
-            v => !!v || 'Phone number is required'
+            v => !!v || 'Phone number is required, xxx-xxx-xxxx format'
             ],             
         }),
         methods: {

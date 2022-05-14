@@ -48,6 +48,7 @@ export const useMenuStore = defineStore('menu',{
                     }
                 }).then((response)=>{
                     cookies.get('restaurantToken');
+                    router.go;
                     console.log(response);
                 }).catch((error)=>{
                     console.log(error.response.data);

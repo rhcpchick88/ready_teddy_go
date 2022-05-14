@@ -103,11 +103,11 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
             ]
         }),
         computed: {
-            ...mapState (useMenuStore, ['menuItems','restaurantId',]),
+            ...mapState (useMenuStore, ['menuItems']),
             ...mapState (useRestaurantStore,['restaurantInfo'])
         },        
         methods: {
-            ...mapActions (useRestaurantStore, ['submitMenu']),
+            ...mapActions (useMenuStore, ['submitMenu']),
             handleMenuItem() {
                 this.submitForm(this.name, this.description, this.price, this.imageUrl);
             },
