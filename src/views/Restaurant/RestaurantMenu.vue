@@ -63,7 +63,10 @@
             <v-btn @click="goToMenu()"> View menus</v-btn>
             <ul>
                 <li v-for="menuItem in menuItems" :key="menuItem.restaurantId">
-                    {{menuItem.name}} - {{menuItem.description}} - {{menuItem.price}}<v-btn @click="deleteMenuItem(menuItem.menuId)" :key="menuItem.menuId">Delete menu item</v-btn></li>
+                    {{menuItem.name}} - {{menuItem.description}} - {{menuItem.price}}
+                    <v-btn @click="deleteMenuItem(menuItem.menuId)" :key="menuItem.menuId">Delete menu item</v-btn>
+                    <!-- <v-btn @click="goToUpdate()">Update menu item</v-btn> -->
+                    </li>
             </ul>            
             </v-container>
             </v-form>
@@ -120,6 +123,9 @@ import RestaurantLogout from '@/components/RestaurantLogout.vue'
             handleStoreError(response){
                 console.log(response);
             },                       
+            goToUpdate(){
+                this.$router.push('/updatemenu')
+            }
         },
         beforeMount() {
             this.editMenuInfo(cookies.get('restaurantId'))    

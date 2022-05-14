@@ -107,9 +107,9 @@ const routes = [
     beforeEnter: restaurantAuth
   },  
   {    
-    path: '/menu',
-    name: 'menu',
-    component: () => import('../views/MenuView.vue')
+    path: '/restaurants',
+    name: 'restaurants',
+    component: () => import('../views/RestaurantView.vue')
   }, 
   {
     path: '/error',

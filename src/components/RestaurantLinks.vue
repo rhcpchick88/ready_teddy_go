@@ -7,7 +7,7 @@
             <v-btn to="/restaurantprofile">Profile</v-btn> |
             <v-btn to="/createmenu">Edit menu</v-btn> |
             <v-btn to="/orderview">Manage orders</v-btn> |
-            <v-btn to="/menu">View restaurant menus</v-btn>
+            <v-btn to="/restaurants">View restaurants</v-btn>
         </nav>
     </div>
 </template>

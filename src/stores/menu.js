@@ -8,7 +8,7 @@ export const useMenuStore = defineStore('menu',{
     state : () => {
         return{
             menuItems: {},
-            restaurantId: undefined,
+            restaurantId: undefined
         } 
     },
     actions:{
@@ -34,7 +34,7 @@ export const useMenuStore = defineStore('menu',{
                 })
             },
 
-            //show menu info for editing on restaurant side
+            //show specific restaurant and items for editing on restaurant side
 
             editMenuInfo(restaurantId){
                 axios.request({
@@ -86,6 +86,10 @@ export const useMenuStore = defineStore('menu',{
             menuCreateAlert(error){
                 return (error)
             },
+
+            // update a specific menu item
+
+
 
             //delete a menu item
 

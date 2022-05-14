@@ -1,4 +1,4 @@
-//this will have a function to show 
+<!-- //this will have a function to show 
 //what the page looks like when clicked on as public, restaurant, and client users. (3 V-IF)
 //link 3 components to this page : restaurant links, client links, and public links.
 //showing the restaurant view will show the restaurant links as well as the public menu
@@ -30,8 +30,8 @@
                     </tbody>
                 </template>
             </v-simple-table>
-            <footer v-if=restaurantLogin()><RestaurantLogout/></footer>
-            <footer v-if=clientLogin()><ClientLogout/></footer>         
+            <footer v-if="restaurantLogin()"><RestaurantLogout/></footer>
+            <footer v-if="clientLogin()"><ClientLogout/></footer>         
         </v-app>   
     </div>
 </template>
@@ -84,4 +84,4 @@ import ClientLogout from '@/components/ClientLogout.vue'
 
 <style lang="scss" scoped>
 
-</style>
+</style> -->

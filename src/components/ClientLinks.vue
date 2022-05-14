@@ -5,7 +5,7 @@
             <v-btn to="/clienthome">Home</v-btn> |
             <v-btn to="/clientprofile">Profile</v-btn> |
             <v-btn to="/cartview">Cart</v-btn> |
-            <v-btn to="/menu">View Menus</v-btn>
+            <v-btn to="/restaurants">View Restaurants</v-btn>
         </nav>
     </div>
 </template>
