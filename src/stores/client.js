@@ -12,6 +12,9 @@ export const useClientStore = defineStore('client',{
         
     },
     actions: {
+
+        //regoster  a  new client
+
         submitClient(username, firstName, lastName, email, password, pictureUrl){
             axios.request({
                 headers: {
@@ -41,6 +44,40 @@ export const useClientStore = defineStore('client',{
         userRegisterAlert(error){
             return (error)
         },
+
+        //update client profile
+
+        updateClient(username, firstName, lastName, email, password, pictureUrl){
+            axios.request({
+                headers: {
+                    "token" : cookies.get('clientToken'),
+                    "x-api-key" : process.env.VUE_APP_API_KEY
+                },
+                url:process.env.VUE_APP_API_URL+"client",
+                method : "PATCH",
+                data: {
+                    username ,
+                    firstName,
+                    lastName,
+                    email,
+                    password,
+                    pictureUrl
+                }
+                
+            }).then((response)=>{
+                console.log(response);
+                router.push('/clientprofile');
+            }).catch((error)=>{
+                console.log(error.response.data);
+                this.clientUpdateAlert(error.response);
+            })
+        },
+        clientUpdateAlert(error){
+            return (error)
+        },
+
+        //request for client information
+
         getClientInfo(){
             axios.request({
                 headers: {
@@ -58,6 +95,9 @@ export const useClientStore = defineStore('client',{
                 this.getClientInfoAlert(error.response);
             })
         },
+
+        //request for client Id
+
         getClientId(clientId){
             axios.request({
                 headers:{

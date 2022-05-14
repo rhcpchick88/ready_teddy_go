@@ -48,6 +48,7 @@ export const useRestaurantStore = defineStore('restaurant',{
                 return (error)
             },
 
+            //update restaurant profile
 
             updateRestaurant(name, address, bio, city, email, password, phoneNum){
                 axios.request({

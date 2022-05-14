@@ -41,12 +41,11 @@ import ClientLogout from '@/components/ClientLogout.vue'
             }
         },
         beforeMount(){
-            this.getClientId(cookies.get('clientId')),
-            this.getClientInfo()
+            this.getClientId(cookies.get('clientId'))
         },
         mounted () {
             useClientStore().$onAction(({name, after})=>{
-                if (name == "getClientInfoAlert"){
+                if (name == "getClientIdAlert"){
                     console.log("handling");
                     after((response)=>{
                         this.handleError(response);

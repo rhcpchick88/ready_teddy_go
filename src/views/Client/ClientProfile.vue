@@ -43,7 +43,7 @@
                 </template>
             </v-simple-table>
             <footer>
-                <v-btn>Update profile</v-btn>                
+                <v-btn @click="goToUpdate()">Update profile</v-btn>                
                 <ClientLogout/>
             </footer>            
         </v-app>
@@ -70,7 +70,10 @@ import ClientLogout from '@/components/ClientLogout.vue'
             ...mapActions (useClientStore, ['getClientInfo', 'getClientId']),
             handleError(response){
                 console.log(response);
-            }
+            },
+            goToUpdate(){
+                this.$router.push('/clientupdateprofile')
+            }            
         },
         beforeMount(){
             this.getClientId(cookies.get('clientId'))
